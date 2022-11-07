@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { createStripePortal } from '@/utils/stripe/server';
 import Button from '@/components/ui/Button';
-import Link from 'next/link';
 import Card from '@/components/ui/Card';
 import { createClient } from '@/utils/supabase/client';
 import { User } from '@supabase/supabase-js';
 import { Tables } from '@/types_db';
+import UserBookings from './UsersBookings';
 
 type Subscription = Tables<'subscriptions'>;
 type Price = Tables<'prices'>;
@@ -42,7 +42,6 @@ export default function SignUpForCoach() {
   const [subscribed, setSubscribed] = useState<boolean | null>(null);
   const [busTours, setBusTours] = useState<BusTour[]>([]);
   const [selectedTour, setSelectedTour] = useState<string>('');
-  const [seatNumber, setSeatNumber] = useState<number | null>(null);
   const [guestMemberIds, setGuestMemberIds] = useState<string>('');
   const supabase = createClient();
 
@@ -100,8 +99,8 @@ export default function SignUpForCoach() {
   };
 
   const handleBooking = async () => {
-    if (!selectedTour || seatNumber === null || !user) {
-      alert('Please select a tour and seat number');
+    if (!selectedTour || !user) {
+      alert('Please select a tour');
       return;
     }
 
@@ -117,6 +116,7 @@ export default function SignUpForCoach() {
       if (paymentError) throw paymentError;
 
       const guestIds = guestMemberIds.split(',').map(id => parseInt(id.trim(), 10)).filter(id => !isNaN(id));
+      const seatNumber = guestIds.length + 1; // Including the user
 
       const { error: bookingError } = await supabase
         .from('bookings')
@@ -130,10 +130,10 @@ export default function SignUpForCoach() {
 
       if (bookingError) throw bookingError;
 
-      alert('Booking successful');
+      alert('Buchung erfolgreich');
     } catch (error: any) {
-      console.error('Error making booking:', error.message);
-      alert('Error making booking');
+      console.error('Sie müssen Mitglied sein, um eine Tour buchen zu können: ', error.message);
+      alert('Sie müssen Mitglied sein, um eine Tour buchen zu können');
     } finally {
       setIsSubmitting(false);
     }
@@ -152,14 +152,14 @@ export default function SignUpForCoach() {
                 Du Kannst dich erst dann für eine Tour anmelden, wenn deine Mitgliedschaft freigeschaltet wurde
               </p>
             )}
-            <Button
+            {/* <Button
               variant="slim"
               onClick={handleStripePortalRequest}
               loading={isSubmitting}
               disabled={!subscribed}
             >
               registrieren
-            </Button>
+            </Button> */}
           </div>
         }
       >
@@ -167,7 +167,7 @@ export default function SignUpForCoach() {
           <form onSubmit={e => { e.preventDefault(); handleBooking(); }}>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="tour">
-                Select Tour
+                Wählen Sie Tour
               </label>
               <select
                 id="tour"
@@ -175,7 +175,7 @@ export default function SignUpForCoach() {
                 onChange={e => setSelectedTour(e.target.value)}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               >
-                <option value="">Select a tour</option>
+                <option value="">Keine Tour ausgewählt</option>
                 {busTours.map(tour => (
                   <option key={tour.id} value={tour.id}>
                     {tour.location} - {new Date(tour.date).toLocaleDateString()}
@@ -184,20 +184,8 @@ export default function SignUpForCoach() {
               </select>
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="seat">
-                Seat Number
-              </label>
-              <input
-                type="number"
-                id="seat"
-                value={seatNumber || ''}
-                onChange={e => setSeatNumber(parseInt(e.target.value, 10))}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div>
-            <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="guests">
-                Guest Member IDs (comma separated)
+                Gastmitglieds-IDs (durch Kommas getrennt)
               </label>
               <input
                 type="text"
@@ -211,15 +199,24 @@ export default function SignUpForCoach() {
               <Button
                 type="submit"
                 variant="slim"
+                className='bg-red-800 text-red-800'
                 loading={isSubmitting}
                 disabled={isSubmitting}
               >
-                Book Tour
+                Melden Sie sich für die Tour an
               </Button>
             </div>
           </form>
         )}
       </Card>
+      {/* <Card
+        title="Ihre Reisen"
+        description="Sehen Sie sich hier die Reisen und den Status an"
+        footer={<div className="flex flex-col items-start justify-between text-white sm:flex-row sm:items-center">
+          <p className="pb-4 sm:pb-0"></p>
+        </div>}>
+        <UserBookings />
+      </Card> */}
     </>
   );
 };

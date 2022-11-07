@@ -79,7 +79,7 @@ export default function Navlinks({ user }: NavlinksProps) {
                 <form onSubmit={handleSignOut} className="inline-block">
                   <input type="hidden" name="pathName" value={pathname ?? ''} />
                   <button type="submit" className="text-gray-700 hover:text-gray-900">
-                    Sign out
+                    Abmelden
                   </button>
                 </form>
               </>
