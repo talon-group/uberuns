@@ -34,7 +34,7 @@ export default function UserStatusChecker({ user, userEmail }: { user: User | nu
           setIsOldUser(false); // Treat as new user if there's an error
         } else {
           setIsOldUser(!!data);
-        }
+        };
 
         if (user?.id) {
           // Check onboarding and terms status in users table
@@ -48,7 +48,7 @@ export default function UserStatusChecker({ user, userEmail }: { user: User | nu
             console.error('Error fetching user data:', userError);
             setErrorMessage('Error fetching user data');
             return;
-          }
+          };
 
           console.log('User data:', userData); // Add this line to see the fetched user data
 
@@ -57,13 +57,13 @@ export default function UserStatusChecker({ user, userEmail }: { user: User | nu
               router.push('/account/onboarding');
             } else {
               router.push('/account');
-            }
+            };            
           } else {
             console.warn('User data is undefined');
-          }
+          };
         } else {
           console.warn('User ID is undefined');
-        }
+        };
 
       } catch (error: any) {
         console.error('Error checking user status:', error.message);
@@ -71,7 +71,7 @@ export default function UserStatusChecker({ user, userEmail }: { user: User | nu
         setIsOldUser(false); // Treat as new user if there's an error
       } finally {
         setLoading(false);
-      }
+      };
     };
 
     checkUserStatus();
@@ -103,4 +103,4 @@ export async function UserStatusCheckerAsPage() {
   return (
     <UserStatusChecker user={user} userEmail={userEmail} />
   );
-}
+};

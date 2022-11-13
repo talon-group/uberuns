@@ -51,15 +51,15 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
 
       try {
         const { data, error } = await supabase
-          .from('users') 
-          .select('*')
-          .eq('id', user.id)
-          .single();
-
-        if (error) {
-          console.error('Error fetching user data:', error);
-          return;
-        }
+        .from('users')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+      
+      if (error) {
+        console.error('Error fetching user data:', error);
+      }
+      
 
         setUserData(data);
         setFormData({
@@ -84,7 +84,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
     };
 
     fetchUserData();
-  }, [user]);
+  }, [supabase, user]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -122,7 +122,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
         .update(updatedData)
         .eq('id', user?.id); 
 
-      if (error) {
+      if (error) { 
         throw error;
       }
 

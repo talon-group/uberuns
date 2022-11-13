@@ -19,14 +19,14 @@ export default async function Account() {
     getProducts(supabase)
   ]);
 
-  if (!user) {
-    if (!user) {
-      return redirect('/signin');
-    };
-  };
+  // if (!user) {
+  //   if (!user) {
+  //     return redirect('/signin');
+  //   };
+  // };
 
   // Convert `user.email` to `string | null`
-  const userEmail: string | null = user.email ?? null;
+  const userEmail: string | null = user?.email ?? null;
 
   return (
     <div
@@ -46,7 +46,7 @@ export default async function Account() {
       <div className="p-4">
       <ContactFormTwo subscription={subscription} />
         <SignUpForCoach />
-        <EmailForm userEmail={user.email} />
+        <EmailForm userEmail={user?.email} />
       </div>
       <UserStatusChecker user={user} userEmail={userEmail} />
       <PaymentsForm user={user} />
