@@ -20,7 +20,9 @@ export default async function Account() {
   ]);
 
   if (!user) {
-    return redirect('/signin');
+    if (!user) {
+      return redirect('/signin');
+    };
   };
 
   // Convert `user.email` to `string | null`

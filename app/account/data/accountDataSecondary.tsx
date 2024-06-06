@@ -160,6 +160,7 @@ export default function SecondUserDataDisplayAccount({ user }: { user: User | nu
             e_mail: userEmail,
             memberid: '',
             fanclub: '',
+            debitorennummer: '',
             nachname: '',
             vorname: '',
             adresse: '',
@@ -302,6 +303,30 @@ Den Debitor kannst du uns aber auch erst bei Bedarf mitteilen, deshalb ist dies 
               value={memberId || ''}
               disabled
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="fanclub" className="text-sm font-medium text-gray-700">Fanclub</label>
+            <input
+              id="fanclub"
+              type="text"
+              name="fanclub"
+              value={userDatas?.fanclub || ''}
+              onChange={handleInputChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+              required
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="debitorennummer" className="text-sm font-medium text-gray-700">Debitorennummer (Bayer 04-Mitgliedsnummer)</label>
+            <input
+              id="debitorennummer"
+              type="text"
+              name="debitorennummer"
+              value={userDatas?.debitorennummer || ''}
+              onChange={handleInputChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+              required
             />
           </div>
           <div className="flex flex-col">

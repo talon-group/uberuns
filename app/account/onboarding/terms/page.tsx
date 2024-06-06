@@ -37,11 +37,11 @@ export default function TermsPage() {
         const { data: { user }, error: authError } = await supabase.auth.getUser();
         if (authError) {
           throw authError;
-        }
+        };
 
         if (!user || !user.id) {
           throw new Error('User is not signed in or user ID is undefined');
-        }
+        };
 
         // Check if the user's data is coming from the userdatas table
         const { data, error } = await supabase
@@ -90,7 +90,7 @@ export default function TermsPage() {
       }
 
       // Redirect to /account
-      router.push('/account');
+      router.push('/wallet');
     } catch (error: any) {
       console.error('Error updating terms status:', error.message);
       setErrorMessage('Error updating terms status.');

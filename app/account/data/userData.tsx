@@ -170,6 +170,7 @@ export default function AccountForm({ user }: { user: User | null }) {
             e_mail: userEmail,
             memberid: memberId ? parseInt(memberId) : null,
             fanclub: '',
+            debitorennummer: '',
             nachname: '',
             vorname: '',
             adresse: '',
@@ -310,6 +311,17 @@ export default function AccountForm({ user }: { user: User | null }) {
               name="fanclub"
               type="text"
               value={userDatas?.fanclub || ''}
+              onChange={handleInputChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="debitorennummer" className="text-sm font-medium text-gray-700">Debitorennummer (Bayer 04-Mitgliedsnummer)</label>
+            <input
+              id="debitorennummer"
+              name="debitorennummer"
+              type="text"
+              value={userDatas?.debitorennummer || ''}
               onChange={handleInputChange}
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
             />

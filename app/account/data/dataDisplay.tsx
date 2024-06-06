@@ -10,6 +10,7 @@ interface FormData {
   full_name: string;
   memberid: string;
   fanclub: string; 
+  debitorennummer: string;
   nachname: string;
   vorname: string;
   adresse: string;
@@ -29,6 +30,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
     memberid: '',
     geb_datum: '',
     fanclub: '',
+    debitorennummer: '',
     nachname: '',
     vorname: '',
     adresse: '',
@@ -64,6 +66,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
           full_name: data.full_name || '',
           memberid: data.memberid || '',
           fanclub: data.fanclub || '',
+          debitorennummer: data.debitorennummer || '',
           nachname: data.nachname || '',
           vorname: data.vorname || '',
           adresse: data.adresse || '',
@@ -187,6 +190,18 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
               value={formData.fanclub}
               onChange={handleChange}
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="debitorennummer" className="text-sm font-medium text-gray-700">Debitorennummer (Bayer 04-Mitgliedsnummer)</label>
+            <input
+              id="debitorennummer"
+              type="text"
+              name="debitorennummer"
+              value={formData.debitorennummer || ''}
+              onChange={handleChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+              required
             />
           </div>
           <div className="flex flex-col">

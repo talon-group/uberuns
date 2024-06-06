@@ -11,6 +11,7 @@ interface FormData {
   full_name: string;
   memberid: string;
   fanclub: string;
+  debitorennummer: string;
   nachname: string;
   vorname: string;
   adresse: string;
@@ -30,6 +31,7 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
     full_name: '',
     memberid: '',
     geb_datum: '',
+    debitorennummer: '',
     land: '',
     fanclub: '',
     nachname: '',
@@ -67,6 +69,7 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
           full_name: data.full_name || '',
           memberid: data.memberid || '',
           fanclub: data.fanclub || '',
+          debitorennummer: data.debitorennummer || '',
           nachname: data.nachname || '',
           vorname: data.vorname || '',
           land: data.land || '',
@@ -173,6 +176,17 @@ Den Debitor kannst du uns aber auch erst bei Bedarf mitteilen, deshalb ist dies 
               name="fanclub"
               type="text"
               value={formData.fanclub}
+              onChange={handleChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="debitorennummer" className="text-sm font-medium text-gray-700">Debitorennummer (Bayer 04-Mitgliedsnummer)</label>
+            <input
+              id="debitorennummer"
+              name="debitorennummer"
+              type="text"
+              value={formData.debitorennummer}
               onChange={handleChange}
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
             />
