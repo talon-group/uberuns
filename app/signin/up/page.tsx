@@ -52,7 +52,7 @@ const SignUpPage: React.FC = () => {
             >
               <div className="grid gap-2">
                 <p className="bg-gray-200">
-                  Use the email that you used when signing up for the Nordkurve under the old system. Create a new password here to use with that email.
+                  Bitte gib deine bei uns hinterlegte E-Mail Adresse an und erstelle dir ein individuelles Passwort, welches du künftig für den Mitgliederbereich benötigst.
                 </p>
                 <div className="grid gap-1">
                   <label htmlFor="email">Email</label>

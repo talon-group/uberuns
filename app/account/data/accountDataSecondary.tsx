@@ -133,11 +133,13 @@ export default function SecondUserDataDisplayAccount({ user }: { user: User | nu
       setError(null);
       setSuccessMessage(null);
 
-      if (!userDatas) {
-        if (!memberId || !userEmail) {
-          setError('Please fill in the required fields.');
-          return;
-        }
+      const requiredFields = ['plz', 'land', 'ort', 'vorname', 'nachname', 'adresse', 'geb_datum'];
+      const missingFields = requiredFields.filter(field => !userDatas?.[field]);
+
+      if (missingFields.length > 0) {
+        setError(`Bitte füllen Sie die folgenden Felder aus: ${missingFields.join(', ')}`);
+        setLoading(false);
+        return;
       }
 
       if (userDatas) {
@@ -156,7 +158,7 @@ export default function SecondUserDataDisplayAccount({ user }: { user: User | nu
           .from('userdatas')
           .insert({
             e_mail: userEmail,
-            memberid: memberId ? parseInt(memberId) : null,
+            memberid: '',
             fanclub: '',
             nachname: '',
             vorname: '',
@@ -252,7 +254,7 @@ export default function SecondUserDataDisplayAccount({ user }: { user: User | nu
 
   return (
     <Card
-      title="Dein Profil"
+      title="Deine Daten"
       footer={
         <>
           <Button
@@ -274,6 +276,10 @@ export default function SecondUserDataDisplayAccount({ user }: { user: User | nu
         </>
       }
     >
+      <p className='text-red-800'>Hier siehst du deine bei uns hinterlegten Daten.<br />
+Bitte überprüfe alles auf Richtigkeit und ändere ggfs. Dinge.<br />
+Neu fragen wir nun auch den Debitor bei Bayer 04 ab, um dir künftig Zugang zu Ticketkäufen in Verbindung mit Bus- oder Zugtouren geben zu können.<br />
+Den Debitor kannst du uns aber auch erst bei Bedarf mitteilen, deshalb ist dies kein Pflichtfeld.</p>
       <div className="form-widget space-y-6">
         {error && <div className="text-red-500">{error}</div>}
         {successMessage && <div className="text-green-500">{successMessage}</div>}
@@ -288,120 +294,110 @@ export default function SecondUserDataDisplayAccount({ user }: { user: User | nu
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
             />
           </div>
-          {/* <div className="flex flex-col">
-            <label htmlFor="memberid" className="text-sm font-medium text-gray-700">Member ID</label>
+          <div className="flex flex-col">
+            <label htmlFor="fullname" className="text-sm font-medium text-gray-700">Full Name</label>
             <input
-              id="memberid"
-              name="memberid"
+              id="fullname"
               type="text"
-              value={memberId || ''}
-              onChange={(e) => setMemberId(e.target.value)}
+              value={fullname || ''}
+              onChange={(e) => setFullname(e.target.value)}
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
             />
-            <Button
-              variant="slim"
-              onClick={generateMemberId}
-              disabled={loading}
-              loading={loading}
-              className="mt-2"
-            >
-              Generate New Member ID
-            </Button>
-          </div> */}
-          {userDatas && (
-            <>
-                <div className="flex flex-col">
-                    <label htmlFor="nachname" className="text-sm font-medium text-gray-700">Member ID *</label>
-                    <input
-                        id="memberid"
-                        name="memberid"
-                        type="text"
-                        value={userDatas.id || ''}
-                        readOnly
-                        className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500 bg-gray-100"
-                    />
-              </div>
-              <div className="flex flex-col">
-                <label htmlFor="nachname" className="text-sm font-medium text-gray-700">Nachname *</label>
-                <input
-                  id="nachname"
-                  name="nachname"
-                  type="text"
-                  value={userDatas.nachname || ''}
-                  onChange={handleInputChange}
-                  className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
-                />
-              </div>
-              <div className="flex flex-col">
-                <label htmlFor="vorname" className="text-sm font-medium text-gray-700">Vorname *</label>
-                <input
-                  id="vorname"
-                  name="vorname"
-                  type="text"
-                  value={userDatas.vorname || ''}
-                  onChange={handleInputChange}
-                  className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
-                />
-              </div>
-              <div className="flex flex-col">
-                <label htmlFor="geb_datum" className="text-sm font-medium text-gray-700">Geb Datum *</label>
-                <input
-                  id="geb_datum"
-                  name="geb_datum"
-                  type="date"
-                  value={userDatas.geb_datum || ''}
-                  onChange={handleInputChange}
-                  className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
-                />
-              </div>
-              <div className="flex flex-col">
-                <label htmlFor="adresse" className="text-sm font-medium text-gray-700">Adresse *</label>
-                <input
-                  id="adresse"
-                  name="adresse"
-                  type="text"
-                  value={userDatas.adresse || ''}
-                  onChange={handleInputChange}
-                  className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
-                />
-              </div>
-              <div className="flex flex-col">
-                <label htmlFor="plz" className="text-sm font-medium text-gray-700">PLZ *</label>
-                <input
-                  id="plz"
-                  name="plz"
-                  type="text"
-                  value={userDatas.plz || ''}
-                  onChange={handleInputChange}
-                  className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
-                />
-              </div>
-              <div className="flex flex-col">
-                <label htmlFor="ort" className="text-sm font-medium text-gray-700">Ort/city *</label>
-                <input
-                  id="ort"
-                  name="ort"
-                  type="text"
-                  value={userDatas.ort || ''}
-                  onChange={handleInputChange}
-                  className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
-                />
-              </div>
-              <div className="flex flex-col">
-                <label htmlFor="plz" className="text-sm font-medium text-gray-700">Land *</label>
-                <input
-                  id="land"
-                  name="land"
-                  type="text"
-                  value={userDatas.land || ''}
-                  onChange={handleInputChange}
-                  className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
-                />
-              </div>
-            </>
-          )}
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="vorname" className="text-sm font-medium text-gray-700">Vorname</label>
+            <input
+              id="vorname"
+              type="text"
+              name="vorname"
+              value={userDatas?.vorname || ''}
+              onChange={handleInputChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+              required
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="nachname" className="text-sm font-medium text-gray-700">Nachname</label>
+            <input
+              id="nachname"
+              type="text"
+              name="nachname"
+              value={userDatas?.nachname || ''}
+              onChange={handleInputChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+              required
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="adresse" className="text-sm font-medium text-gray-700">Adresse</label>
+            <input
+              id="adresse"
+              type="text"
+              name="adresse"
+              value={userDatas?.adresse || ''}
+              onChange={handleInputChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+              required
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="plz" className="text-sm font-medium text-gray-700">PLZ</label>
+            <input
+              id="plz"
+              type="text"
+              name="plz"
+              value={userDatas?.plz || ''}
+              onChange={handleInputChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+              required
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="ort" className="text-sm font-medium text-gray-700">Ort</label>
+            <input
+              id="ort"
+              type="text"
+              name="ort"
+              value={userDatas?.ort || ''}
+              onChange={handleInputChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+              required
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="land" className="text-sm font-medium text-gray-700">Land</label>
+            <input
+              id="land"
+              type="text"
+              name="land"
+              value={userDatas?.land || ''}
+              onChange={handleInputChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+              required
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="geb_datum" className="text-sm font-medium text-gray-700">Geburtsdatum</label>
+            <input
+              id="geb_datum"
+              type="date"
+              name="geb_datum"
+              value={userDatas?.geb_datum || ''}
+              onChange={handleInputChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+              required
+            />
+          </div>
         </div>
+        <Button variant="slim" onClick={generateMemberId} disabled={loading || !userDatas || !!memberId}>
+          {loading ? 'Generating...' : 'Generate Member ID'}
+        </Button>
+        {memberId && (
+          <div className="text-sm text-gray-700 mt-2">
+            <span>Member ID:</span> <span className="font-semibold">{memberId}</span>
+          </div>
+        )}
       </div>
     </Card>
   );
-};
+}

@@ -215,4 +215,4 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
       </div>
     </Card>
   );
-}
+};

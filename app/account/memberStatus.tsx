@@ -14,7 +14,7 @@ export default function UserStatusChecker({ user, userEmail }: { user: User | nu
   const [isOldUser, setIsOldUser] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  useEffect(() => {
+  useEffect(() => { 
     const checkUserStatus = async () => {
       if (!userEmail) {
         setLoading(false);

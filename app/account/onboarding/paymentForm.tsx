@@ -98,6 +98,7 @@ export default function PaymentsForm({ user }: PaymentsFormProps) {
       description="Aktualisieren Sie Ihre IBAN und überprüfen Sie Ihren Abonnementstatus"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
+        <p className='text-red-800 text-l'>Hier kannst du für 19,04€ pro Saison in den Nordkurve12 e.V. eintreten. Wenn du schon einmal Mitglied warst, melde dich bitte bei uns und fülle bitte nichts aus.</p>
         <div className="flex flex-col">
           <label htmlFor="iban" className="text-sm font-medium text-gray-700">
             IBAN

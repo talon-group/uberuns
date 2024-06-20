@@ -32,11 +32,10 @@ export default async function PricingPage() {
   if (user) {
     // Fetch user data with proper error handling
     const { data: userData, error: userError } = await supabase
-    .from('users')
-    .select('onboarding, terms')
-    .eq('id', user.id)
-    .single() as { data: UserData; error: any };
-  
+      .from('users')
+      .select('onboarding, terms')
+      .eq('id', user.id)
+      .single() as { data: UserData; error: any };
 
     if (userError) {
       console.error('Error fetching user data:', userError);
@@ -52,22 +51,15 @@ export default async function PricingPage() {
   }
 
   return (
-    <>
-      {/* <Pricing
-        user={user}
-        products={products ?? []}
-        subscription={subscription}
-      /> */}
-      {/* <HeroSection
-        header="Nordkurve12 e.V."
-        subtitle="B04"
-        imageSrc="https://idontwanttofadebut.vercel.app/NK.png"  // Make sure to use a valid path to your image
-        buttonText="Your Account"
-        buttonLink="/account"  // Replace with the actual link you want the button to navigate to
-      /> */}
-      {!user && <CallToActionGrid />}
-      <ShortNewsletterPosts />
-      {/* <HomeContent /> */}
-    </>
+    <div className="relative min-h-screen">
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-20"
+        style={{ backgroundImage: "url('https://github.com/talon-group/uberuns/blob/3d6f3d6a3f731bb1308cf5fa1977480e0b3a1c71/public/bg.jpeg?raw=true')" }}
+      ></div>
+      <div className="relative z-10">
+        {!user && <CallToActionGrid />}
+        <ShortNewsletterPosts />
+      </div>
+    </div>
   );
 };

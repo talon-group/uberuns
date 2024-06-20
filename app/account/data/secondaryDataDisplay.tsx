@@ -17,6 +17,7 @@ interface FormData {
   geb_datum: string;
   telefon: string;
   plz: string;
+  land: string;
   ort: string;
 }
 
@@ -29,6 +30,7 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
     full_name: '',
     memberid: '',
     geb_datum: '',
+    land: '',
     fanclub: '',
     nachname: '',
     vorname: '',
@@ -67,13 +69,14 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
           fanclub: data.fanclub || '',
           nachname: data.nachname || '',
           vorname: data.vorname || '',
+          land: data.land || '',
           adresse: data.adresse || '',
           geb_datum: data.geb_datum || '',
           telefon: data.telefon || '',
           ort: data.ort || '',
           plz: data.plz || '',
         });
-      } catch (error: any) {
+      } catch (error: any) { 
         console.error('Error fetching user data:', error.message);
       } finally {
         setLoading(false);
@@ -99,7 +102,7 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
     setUpdateSuccessful(false); // Reset updateSuccessful state
 
     // Validate required fields
-    const requiredFields: (keyof FormData)[] = ['vorname', 'nachname', 'adresse', 'plz', 'ort'];
+    const requiredFields: (keyof FormData)[] = ['vorname', 'nachname', 'adresse', 'plz', 'ort', 'land', 'geb_datum'];
     const missingFields = requiredFields.filter(field => !formData[field]);
 
     if (missingFields.length > 0) {
@@ -138,7 +141,8 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
   }
 
   return (
-    <Card title="Dein Profil">
+    <Card title="Deine Daten">
+      <p className='text-red-800'>Bitte füll die folgenden Felder aus, um in die Nordkurve12 einzutreten.</p>
       <div className="form-widget space-y-6">
         {successMessage && <p className="text-green-600">{successMessage}</p>}
         {error && <p className="text-red-600">{error}</p>}
@@ -212,6 +216,17 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
             />
           </div>
           <div className="flex flex-col">
+            <label htmlFor="ort" className="text-sm font-medium text-gray-700">City *</label>
+            <input
+              id="ort"
+              name="ort"
+              type="text"
+              value={formData.ort}
+              onChange={handleChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+            />
+          </div>
+          <div className="flex flex-col">
             <label htmlFor="plz" className="text-sm font-medium text-gray-700">PLZ *</label>
             <input
               id="plz"
@@ -223,12 +238,12 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="ort" className="text-sm font-medium text-gray-700">City *</label>
+            <label htmlFor="land" className="text-sm font-medium text-gray-700">Land *</label>
             <input
-              id="ort"
-              name="ort"
+              id="land"
+              name="land"
               type="text"
-              value={formData.ort}
+              value={formData.land}
               onChange={handleChange}
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
             />
@@ -249,7 +264,7 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
             disabled={isSubmitting}
             className="mt-4 px-4 py-2 bg-red-800 text-white rounded-md shadow-sm hover:bg-red-300 disabled:opacity-50"
           >
-            {isSubmitting ? 'Updating...' : 'Profil aktualisieren'}
+            {isSubmitting ? 'Updating...' : 'Daten aktualisieren'}
           </button>
         </form>
         {updateSuccessful && (

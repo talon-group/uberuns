@@ -153,7 +153,7 @@ export default function AccountForm({ user }: { user: User | null }) {
       if (userDatas) {
         // Update userdatas table if userDatas is loaded
         const { id, ...userDatasWithoutId } = userDatas;
-
+ 
         const { error: userDatasError } = await supabase
           .from('userdatas')
           .update(userDatasWithoutId)
@@ -265,7 +265,7 @@ export default function AccountForm({ user }: { user: User | null }) {
 
   return (
     <Card
-      title="Dein Profil"
+      title="Deine Daten"
       footer={
         <Button
           variant="slim"

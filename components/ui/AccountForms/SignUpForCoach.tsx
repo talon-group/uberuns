@@ -85,7 +85,7 @@ export default function SignUpForCoach({ subscription }: Props) {
   return (
     <>
       <Card
-        title="Melden Sie sich für einen Coach an"
+        title="Melde dich für eine Tour an."
         description="Derzeit sind noch keine Trainer verfügbar"
         footer={
           <div className="flex flex-col items-start justify-between text-white sm:flex-row sm:items-center">
@@ -110,7 +110,7 @@ export default function SignUpForCoach({ subscription }: Props) {
       </Card>
       <Card
         title="Kontaktiere uns"
-        description="Wenn Sie Hilfe mit Ihrem Konto benötigen, nehmen Sie Kontakt mit uns auf"
+        description="Du hast eine Frage? Füll das Formular aus und wir melden uns bei dir."
         footer={
           <div className="flex flex-col items-start justify-between text-white sm:flex-row sm:items-center">
             <p className="pb-4 sm:pb-0"></p>

@@ -98,14 +98,14 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
     setSuccessMessage(null);
 
     // Validate required fields
-    const requiredFields: (keyof FormData)[] = ['vorname', 'nachname', 'adresse', 'plz', 'ort'];
+    const requiredFields: (keyof FormData)[] = ['vorname', 'nachname', 'adresse', 'plz', 'ort', 'geb_datum'];
     const missingFields = requiredFields.filter(field => !formData[field]);
 
     if (missingFields.length > 0) {
       setError(`Bitte füllen Sie die folgenden Felder aus: ${missingFields.join(', ')}`);
       setIsSubmitting(false);
       return;
-    }
+    };
 
     try {
       // Ensure memberid is either a valid number or null if empty
@@ -137,7 +137,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
   }
 
   return (
-    <Card title="Dein Profil">
+    <Card title="Deine Daten">
       <div className="form-widget space-y-6">
         {successMessage && <p className="text-green-600">{successMessage}</p>}
         {error && <p className="text-red-600">{error}</p>}
@@ -145,7 +145,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
             {/* Welcome to your Nordkurve account! Please fill in your information */}
           </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             <label htmlFor="email" className="text-sm font-medium text-gray-700">Mitgliedsnummer</label>
             <input
               id="MemberId"
@@ -154,7 +154,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
               readOnly
             />
-          </div>
+          </div> */}
           <div className="flex flex-col">
             <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>
             <input
@@ -269,7 +269,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
             disabled={isSubmitting}
             className="mt-4 px-4 py-2 bg-red-800 text-white rounded-md shadow-sm hover:bg-red-700 disabled:opacity-50"
           >
-            {isSubmitting ? 'Updating...' : 'Profil aktualisieren'}
+            {isSubmitting ? 'Updating...' : 'Daten aktualisieren'}
           </button>
         </form>
       </div>
