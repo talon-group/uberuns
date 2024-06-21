@@ -9,7 +9,8 @@ import AccountForm from './userData';
 import UserDataDisplay from './dataDisplay';
 import SecondUserDataDisplay from './secondaryDataDisplay';
 import { useRouter } from 'next/navigation';
-
+import SecondUserDataDisplayAccount from './accountDataSecondary';
+ 
 export default function ExistingUserButton({ user }: { user: User | null }) {
   const supabase = createClient();
   const router = useRouter();
@@ -179,7 +180,7 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
   if (userData) {
     return (
       <div className='p-10'>
-        <AccountForm user={user} />
+        <SecondUserDataDisplayAccount user={user} />
         {hasRequiredData && (
           <Button
             variant="slim"
@@ -192,7 +193,7 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
         )}
       </div>
     );
-  }
+  };
 
   return (
     <Card title="Existing User Data">

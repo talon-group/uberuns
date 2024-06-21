@@ -47,8 +47,14 @@ export default function Navlinks({ user }: NavlinksProps) {
         <div className="flex flex-col md:flex-row md:space-x-4 mt-4 md:mt-0">
           {/* Left-aligned links */}
           <nav className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+            <Link href="/" className="text-gray-700 hover:text-gray-900">
+              STARTSEITE
+            </Link>
             <Link href="/about/" className="text-gray-700 hover:text-gray-900">
               ÜBER UNS
+            </Link>
+            <Link href="https://nordkurve2-newsletter.ghost.io/" className="text-gray-700 hover:text-gray-900">
+              NEWS
             </Link>
             <Link href="/about/reines" className="text-gray-700 hover:text-gray-900">
               REINES GEWISSEN

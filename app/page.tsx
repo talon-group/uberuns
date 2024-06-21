@@ -58,16 +58,16 @@ export default async function PricingPage() {
         products={products ?? []}
         subscription={subscription}
       /> */}
-      <HeroSection
+      {/* <HeroSection
         header="Nordkurve12 e.V."
         subtitle="B04"
         imageSrc="https://idontwanttofadebut.vercel.app/NK.png"  // Make sure to use a valid path to your image
         buttonText="Your Account"
         buttonLink="/account"  // Replace with the actual link you want the button to navigate to
-      />
+      /> */}
       {!user && <CallToActionGrid />}
       <ShortNewsletterPosts />
       {/* <HomeContent /> */}
     </>
   );
-}
+};

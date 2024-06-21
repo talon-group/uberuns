@@ -24,11 +24,11 @@ export default function HeroSection({
   return (
     <section className="relative bg-gray-900 text-white overflow-hidden">
       <div className="absolute inset-0">
-        <Image
+        <img
           src={imageSrc}
           alt="Hero Image"
-          layout="fill"
-          objectFit="cover"
+          // layout="fill"
+          // objectFit="cover"
           className="object-center object-cover"
         />
         <div className="absolute inset-0 bg-black opacity-50" />

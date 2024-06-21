@@ -14,6 +14,7 @@ interface FormData {
   nachname: string;
   vorname: string;
   adresse: string;
+  geb_datum: string;
   telefon: string;
   plz: string;
   ort: string;
@@ -27,6 +28,7 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
   const [formData, setFormData] = useState<FormData>({
     full_name: '',
     memberid: '',
+    geb_datum: '',
     fanclub: '',
     nachname: '',
     vorname: '',
@@ -66,6 +68,7 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
           nachname: data.nachname || '',
           vorname: data.vorname || '',
           adresse: data.adresse || '',
+          geb_datum: data.geb_datum || '',
           telefon: data.telefon || '',
           ort: data.ort || '',
           plz: data.plz || '',
@@ -128,7 +131,7 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }; 
 
   if (loading) {
     return <p>Loading...</p>;
@@ -182,6 +185,17 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
               name="nachname"
               type="text"
               value={formData.nachname}
+              onChange={handleChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="geb_datum" className="text-sm font-medium text-gray-700">Geb Datum *</label>
+            <input
+              id="geb_datum"
+              name="geb_datum"
+              type="date"
+              value={formData.geb_datum}
               onChange={handleChange}
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
             />

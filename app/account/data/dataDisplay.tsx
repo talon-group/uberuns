@@ -14,7 +14,9 @@ interface FormData {
   vorname: string;
   adresse: string;
   telefon: string;
+  geb_datum: string;
   plz: string;
+  land: string;
   ort: string;
 }
 
@@ -25,6 +27,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
   const [formData, setFormData] = useState<FormData>({
     full_name: '',
     memberid: '',
+    geb_datum: '',
     fanclub: '',
     nachname: '',
     vorname: '',
@@ -32,6 +35,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
     telefon: '',
     plz: '',
     ort: '',
+    land: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -63,9 +67,11 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
           nachname: data.nachname || '',
           vorname: data.vorname || '',
           adresse: data.adresse || '',
+          geb_datum: data.geb_datum || '',
           telefon: data.telefon || '',
           ort: data.ort || '',
           plz: data.plz || '',
+          land: data.land || '',
         });
       } catch (error: any) {
         console.error('Error fetching user data:', error.message);
@@ -111,7 +117,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
       const { error } = await supabase
         .from('users')
         .update(updatedData)
-        .eq('id', user?.id);
+        .eq('id', user?.id); 
 
       if (error) {
         throw error;
@@ -193,6 +199,17 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
             />
           </div>
           <div className="flex flex-col">
+            <label htmlFor="geb_datum" className="text-sm font-medium text-gray-700">Geb Datum *</label>
+            <input
+              id="geb_datum"
+              name="geb_datum"
+              type="date"
+              value={formData.geb_datum}
+              onChange={handleChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+            />
+          </div>
+          <div className="flex flex-col">
             <label htmlFor="adresse" className="text-sm font-medium text-gray-700">Adresse *</label>
             <input
               id="adresse"
@@ -221,6 +238,17 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
               name="ort"
               type="text"
               value={formData.ort}
+              onChange={handleChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="land" className="text-sm font-medium text-gray-700">Land *</label>
+            <input
+              id="land"
+              name="land"
+              type="text"
+              value={formData.land}
               onChange={handleChange}
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
             />

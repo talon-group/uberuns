@@ -19,7 +19,7 @@ export default function UserStatusChecker({ user, userEmail }: { user: User | nu
       if (!userEmail) {
         setLoading(false);
         return;
-      }
+      };
 
       try {
         // Check if user exists in userdatas table
