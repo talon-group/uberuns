@@ -44,42 +44,45 @@ export default function Navlinks({ user }: NavlinksProps) {
         </button>
       </div>
       <div className={`md:flex md:items-center ${isOpen ? 'block' : 'hidden'}`}>
-        <nav className="flex flex-col md:flex-row md:space-x-4 mt-4 md:mt-0">
-          {/* <Link href="/newsletter" className="block md:inline-block text-gray-700 hover:text-gray-900">Newsletter</Link> */}
-          <Link href="/about/" className="block md:inline-block text-gray-700 hover:text-gray-900">
-            ÜBER UNS
-          </Link>
-          <Link href="/about/reines" className="block md:inline-block text-gray-700 hover:text-gray-900">
-            REINES GEWISSEN
-          </Link>
-          <Link href="/about/podcast" className="block md:inline-block text-gray-700 hover:text-gray-900">
-            PODCAST
-          </Link>
-          <Link href="/about/fussballroute" className="block md:inline-block text-gray-700 hover:text-gray-900">
-            FUSSBALLROUTE
-          </Link>
-          <Link href="/about/stadioneck" className="block md:inline-block text-gray-700 hover:text-gray-900">
-            STADIONECK
-          </Link>
-        </nav>
-        <div className="mt-4 md:mt-0 md:ml-auto">
-          {user ? (
-            <>
-              <Link href="/account" className="block md:inline-block text-gray-700 hover:text-gray-900">
-                Account
-              </Link>
-              <form onSubmit={handleSignOut} className="inline-block">
-                <input type="hidden" name="pathName" value={pathname ?? ''} />
-                <button type="submit" className="block text-gray-700 hover:text-gray-900">
-                  Sign out
-                </button>
-              </form>
-            </>
-          ) : (
-            <Link href="/signin" className="block md:inline-block text-gray-700 hover:text-gray-900">
-              Sign In
+        <div className="flex flex-col md:flex-row md:space-x-4 mt-4 md:mt-0">
+          {/* Left-aligned links */}
+          <nav className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+            <Link href="/about/" className="text-gray-700 hover:text-gray-900">
+              ÜBER UNS
             </Link>
-          )}
+            <Link href="/about/reines" className="text-gray-700 hover:text-gray-900">
+              REINES GEWISSEN
+            </Link>
+            <Link href="/about/podcast" className="text-gray-700 hover:text-gray-900">
+              PODCAST
+            </Link>
+            <Link href="/about/fussballroute" className="text-gray-700 hover:text-gray-900">
+              FUSSBALLROUTE
+            </Link>
+            <Link href="/about/stadioneck" className="text-gray-700 hover:text-gray-900">
+              STADIONECK
+            </Link>
+          </nav>
+          {/* Right-aligned buttons */}
+          <div className="ml-auto flex flex-col md:flex-row md:space-x-4 mt-4 md:mt-0">
+            {user ? (
+              <>
+                <Link href="/account" className="text-gray-700 hover:text-gray-900">
+                  Account
+                </Link>
+                <form onSubmit={handleSignOut} className="inline-block">
+                  <input type="hidden" name="pathName" value={pathname ?? ''} />
+                  <button type="submit" className="text-gray-700 hover:text-gray-900">
+                    Sign out
+                  </button>
+                </form>
+              </>
+            ) : (
+              <Link href="/signin" className="text-gray-700 hover:text-gray-900">
+                Sign In
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </nav>

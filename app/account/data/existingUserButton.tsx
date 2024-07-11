@@ -7,19 +7,20 @@ import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import AccountForm from './userData';
 import UserDataDisplay from './dataDisplay';
-import { useRouter } from 'next/navigation'; // Import useRouter
+import SecondUserDataDisplay from './secondaryDataDisplay';
+import { useRouter } from 'next/navigation';
 
 export default function ExistingUserButton({ user }: { user: User | null }) {
   const supabase = createClient();
-  const router = useRouter(); // Initialize useRouter
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [userEmail, setUserEmail] = useState<string | undefined>(undefined);
-  const [userDatas, setUserDatas] = useState<any>(null);
+  const [userData, setUserData] = useState<any>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (user) {
-      setUserEmail(user.email); // Fetching user's email from supabase auth
+      setUserEmail(user.email);
     }
   }, [user]);
 
@@ -33,27 +34,44 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
       setLoading(true);
       console.log("Fetching user data for email:", userEmail);
 
-      // Fetch user data from userdatas table by email
-      const { data, error, status } = await supabase
+      // First, check userdatas table
+      const { data: userDataFromUserdatas, error: userDataErrorFromUserdatas } = await supabase
         .from('userdatas')
         .select('*')
         .eq('e_mail', userEmail)
         .single();
 
-      if (error && status !== 406) {
-        console.error('Error fetching user data:', error);
-        throw error;
+      if (userDataErrorFromUserdatas && userDataErrorFromUserdatas.code !== 'PGRST116') { // Ignore 'not found' errors
+        console.error('Error fetching user data from userdatas:', userDataErrorFromUserdatas);
+        throw userDataErrorFromUserdatas;
       }
 
-      if (data) {
-        setUserDatas(data);
-        console.log('User data fetched successfully:', data);
+      let userData = userDataFromUserdatas;
+
+      if (!userData) {
+        // If no data found in userdatas, check the users table
+        const { data: userDataFromUsers, error: userDataErrorFromUsers } = await supabase
+          .from('users')
+          .select('*')
+          .eq('e_mail', userEmail)
+          .single();
+
+        if (userDataErrorFromUsers && userDataErrorFromUsers.code !== 'PGRST116') { // Ignore 'not found' errors
+          console.error('Error fetching user data from users:', userDataErrorFromUsers);
+          throw userDataErrorFromUsers;
+        }
+
+        userData = userDataFromUsers;
+      }
+
+      if (userData) {
+        setUserData(userData);
+        console.log('User data fetched successfully:', userData);
 
         // Determine new member ID
-        let newMemberId = data.id; // Default to old member ID if it exists
+        let newMemberId = userData.id;
 
-        if (!data.memberid) {
-          // Generate new member ID for new users
+        if (!userData.memberid) {
           const { data: highestMemberIdData, error: highestMemberIdError } = await supabase
             .from('users')
             .select('memberid')
@@ -70,13 +88,12 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
 
         console.log('Setting new member ID:', newMemberId);
 
-        // Update the user entry in users table
         const { error: updateUserError } = await supabase
           .from('users')
           .update({
-            full_name: data.full_name,
+            full_name: userData.full_name,
             memberid: newMemberId,
-            userdatas: data.id
+            userdatas: userData.id
           })
           .eq('id', user.id);
 
@@ -86,7 +103,7 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
         }
       } else {
         console.warn('No matching user data found for email:', userEmail);
-        setUserDatas(null); // Ensure no user data is displayed
+        setUserData(null);
         setErrorMessage('No user data found for this email.');
       }
     } catch (error: any) {
@@ -112,7 +129,6 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
     try {
       setLoading(true);
 
-      // Update the onboarding status
       const { error } = await supabase
         .from('users')
         .update({ onboarding: true })
@@ -122,51 +138,58 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
         throw error;
       }
 
-      // Redirect to the onboarding terms page
       router.push('/account/onboarding/terms');
     } catch (error: any) {
       console.error('Error updating onboarding status:', error.message);
       alert('Error updating onboarding status.');
     } finally {
       setLoading(false);
-    };
+    }
   };
 
-  // If no user data is found and there's an error, return null
-  if (userDatas === null && errorMessage) {
+  // Determine if required fields are filled
+  const hasRequiredData = userData &&
+    userData.vorname &&
+    userData.nachname &&
+    userData.adresse &&
+    userData.city &&
+    userData.ort &&
+    userData.plz;
+
+  if (userData === null && errorMessage) {
     return (
       <div>
-        <UserDataDisplay user={user} /> 
-        <Button
+        <SecondUserDataDisplay user={user} />
+        {/* <Button
           variant="slim"
           onClick={handleNextStep}
           disabled={loading}
           className='bg-red-800'
         >
           {loading ? 'Loading ...' : 'Next Step'}
-        </Button>
+        </Button> */}
       </div>
     );
   };
 
-  // If user data is available, render AccountForm
-  if (userDatas) {
+  if (userData) {
     return (
       <div className='p-10'>
         <AccountForm user={user} />
-        <Button
-          variant="slim"
-          onClick={handleNextStep}
-          disabled={loading}
-          className='bg-red-800'
-        >
-          {loading ? 'Loading ...' : 'Next Step'}
-        </Button>
+        {hasRequiredData && (
+          <Button
+            variant="slim"
+            onClick={handleNextStep}
+            disabled={loading}
+            className='bg-red-800'
+          >
+            {loading ? 'Loading ...' : 'Next Step'}
+          </Button>
+        )}
       </div>
     );
-  };
+  }
 
-  // Render existing UI when loading or showing no data message
   return (
     <Card title="Existing User Data">
       <div className="form-widget space-y-6">

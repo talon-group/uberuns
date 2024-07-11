@@ -10,6 +10,7 @@ import HomeContent from './homeContent';
 import CallToActionGrid from './signin/cta';
 import NewsletterPosts from './newsletter/NewsComponent';
 import ShortNewsletterPosts from './newsletter/ShortenedNewsComp';
+import HeroSection from './signin/hero';
 
 // Define the type for user data
 interface UserData {
@@ -52,11 +53,18 @@ export default async function PricingPage() {
 
   return (
     <>
-      <Pricing
+      {/* <Pricing
         user={user}
         products={products ?? []}
         subscription={subscription}
-      />
+      /> */}
+      {/* <HeroSection {
+        header: 'Welcome to the Club',
+        subtitle: 'Join the club and get access to exclusive content and events',
+        imageSrc: '/images/hero.jpg',
+        buttonText: 'Sign Up',
+        buttonLink: '/signup
+      } /> */}
       {!user && <CallToActionGrid />}
       <ShortNewsletterPosts />
       {/* <HomeContent /> */}

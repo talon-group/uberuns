@@ -286,7 +286,7 @@ export default function AccountForm({ user }: { user: User | null }) {
               id="email"
               type="text"
               value={user?.email}
-              disabled
+              disabled 
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
             />
           </div>

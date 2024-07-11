@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import { type User } from '@supabase/supabase-js';
 import Card from '@/components/ui/Card';
+import { useRouter } from 'next/navigation'; // Import useRouter
 
 // Define an interface for the form data
 interface FormData {
   full_name: string;
   memberid: string;
-  fanclub: string; 
+  fanclub: string;
   nachname: string;
   vorname: string;
   adresse: string;
@@ -18,8 +19,9 @@ interface FormData {
   ort: string;
 }
 
-export default function UserDataDisplay({ user }: { user: User | null }) {
+export default function SecondUserDataDisplay({ user }: { user: User | null }) {
   const supabase = createClient();
+  const router = useRouter(); // Initialize useRouter
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState<any>(null);
   const [formData, setFormData] = useState<FormData>({
@@ -36,6 +38,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [updateSuccessful, setUpdateSuccessful] = useState(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -90,6 +93,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
     setIsSubmitting(true);
     setError(null);
     setSuccessMessage(null);
+    setUpdateSuccessful(false); // Reset updateSuccessful state
 
     // Validate required fields
     const requiredFields: (keyof FormData)[] = ['vorname', 'nachname', 'adresse', 'plz', 'ort'];
@@ -102,7 +106,6 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
     }
 
     try {
-      // Ensure memberid is either a valid number or null if empty
       const updatedData = {
         ...formData,
         memberid: formData.memberid ? parseInt(formData.memberid, 10) : null,
@@ -118,6 +121,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
       }
 
       setSuccessMessage('User data updated successfully!');
+      setUpdateSuccessful(true); // Set updateSuccessful to true
     } catch (error: any) {
       setError('Error updating user data!');
       console.error('Error updating user data:', error.message);
@@ -234,6 +238,16 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
             {isSubmitting ? 'Updating...' : 'Update Profile'}
           </button>
         </form>
+        {updateSuccessful && (
+          <div className="mt-4">
+            <button
+              onClick={() => router.push('/account/onboarding/terms')}
+              className="px-4 py-2 bg-green-600 text-white rounded-md shadow-sm hover:bg-green-700"
+            >
+              Next Step
+            </button>
+          </div>
+        )}
       </div>
     </Card>
   );
@@ -247,6 +261,6 @@ export async function UserDataDisplayAsPage() {
   } = await supabase.auth.getUser();
 
   return (
-    <UserDataDisplay user={user} />
+    <SecondUserDataDisplay user={user} />
   );
 }
