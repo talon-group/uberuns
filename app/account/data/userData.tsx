@@ -5,7 +5,7 @@ import { createClient } from '@/utils/supabase/client';
 import { type User } from '@supabase/supabase-js';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
- 
+
 export default function AccountForm({ user }: { user: User | null }) {
   const supabase = createClient();
   const [loading, setLoading] = useState(true);
@@ -14,6 +14,8 @@ export default function AccountForm({ user }: { user: User | null }) {
   const [userDatas, setUserDatas] = useState<any>(null);
   const [userMemberId, setUserMemberId] = useState<any>('');
   const [userEmail, setUserEmail] = useState<string | undefined>(undefined);
+  const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (user) {
@@ -123,7 +125,6 @@ export default function AccountForm({ user }: { user: User | null }) {
       }
     } catch (error: any) {
       console.error('Error loading user data:', error.message);
-      // alert('Error loading user data!');
     } finally {
       setLoading(false);
     }
@@ -138,6 +139,16 @@ export default function AccountForm({ user }: { user: User | null }) {
   async function updateProfile() {
     try {
       setLoading(true);
+      setError(null);
+      setSuccessMessage(null);
+
+      if (!userDatas) {
+        // Ensure required fields are not empty if creating a new record
+        if (!memberId || !userEmail) {
+          setError('Please fill in the required fields.');
+          return;
+        }
+      }
 
       if (userDatas) {
         // Update userdatas table if userDatas is loaded
@@ -198,10 +209,10 @@ export default function AccountForm({ user }: { user: User | null }) {
         throw userError;
       }
 
-      // alert('Profile updated!');
+      setSuccessMessage('Profile updated successfully!');
     } catch (error: any) {
+      setError('Error updating profile!');
       console.error('Error updating profile:', error.message);
-      // alert('Error updating profile!');
     } finally {
       setLoading(false);
     }
@@ -234,10 +245,10 @@ export default function AccountForm({ user }: { user: User | null }) {
       }
 
       setMemberId(newMemberId.toString());
-      // alert('New Member ID generated!');
+      setSuccessMessage('New Member ID generated successfully!');
     } catch (error: any) {
+      setError('Error generating member ID!');
       console.error('Error generating member ID:', error.message);
-      // alert('Error generating member ID!');
     } finally {
       setLoading(false);
     }
@@ -266,6 +277,8 @@ export default function AccountForm({ user }: { user: User | null }) {
       }
     >
       <div className="form-widget space-y-6">
+        {error && <div className="text-red-500">{error}</div>}
+        {successMessage && <div className="text-green-500">{successMessage}</div>}
         <div className="space-y-4">
           <div className="flex flex-col">
             <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>
@@ -277,24 +290,13 @@ export default function AccountForm({ user }: { user: User | null }) {
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
             />
           </div>
-          {/* <div className="flex flex-col">
-            <label htmlFor="fullname" className="text-sm font-medium text-gray-700">Full Name</label>
-            <input
-              id="fullname"
-              name="fullname"
-              type="text"
-              value={fullname || ''}
-              onChange={(e) => setFullname(e.target.value)}
-              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
-            />
-          </div> */}
           <div className="flex flex-col">
             <label htmlFor="memberid" className="text-sm font-medium text-gray-700">Member ID</label>
             <input
               id="memberid"
               name="memberid"
               type="text"
-              value={userDatas?.id}
+              value={memberId}
               readOnly
               onChange={(e) => setMemberId(e.target.value)}
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500 bg-gray-100"
@@ -366,21 +368,9 @@ export default function AccountForm({ user }: { user: User | null }) {
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
             />
           </div>
-          {/* <div className="flex flex-col">
-            <label htmlFor="e_mail" className="text-sm font-medium text-gray-700">E-Mail</label>
-            <input
-              id="e_mail"
-              name="e_mail"
-              type="text"
-              value={userDatas?.e_mail || ''}
-              onChange={handleInputChange}
-              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
-            />
-          </div> */}
         </div>
       </div>
     </Card>
-    // HAS COMPLETED ONBOARDING FIELD - CAN BE ACROSS BOTH TABLES
   );
 }
 

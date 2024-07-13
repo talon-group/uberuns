@@ -6,6 +6,7 @@ import UserStatusChecker from './memberStatus';
 import { redirect } from 'next/navigation';
 import { createClient } from '@/utils/supabase/server';
 import { getUserDetails, getSubscription, getUser, getProducts } from '@/utils/supabase/queries';
+import PaymentsForm from './onboarding/paymentForm';
 
 export default async function Account() {
   const supabase = createClient();
@@ -34,9 +35,10 @@ export default async function Account() {
       </div>
       <div className="p-4">
         <EmailForm userEmail={user.email} />
-        {subscription && (
+        <PaymentsForm user={user} />
+        {/* {subscription && (
           <CustomerPortalForm subscription={subscription} />
-        )}
+        )} */}
         {/* {!subscription && (
           <YearlyBillingProducts products={products ?? []} subscription={subscription} />
         )} */}

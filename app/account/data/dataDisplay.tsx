@@ -5,11 +5,24 @@ import { createClient } from '@/utils/supabase/client';
 import { type User } from '@supabase/supabase-js';
 import Card from '@/components/ui/Card';
 
+// Define an interface for the form data
+interface FormData {
+  full_name: string;
+  memberid: string;
+  fanclub: string;
+  nachname: string;
+  vorname: string;
+  adresse: string;
+  telefon: string;
+  plz: string;
+  ort: string;
+}
+
 export default function UserDataDisplay({ user }: { user: User | null }) {
   const supabase = createClient();
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState<any>(null);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     full_name: '',
     memberid: '',
     fanclub: '',
@@ -78,6 +91,16 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
     setError(null);
     setSuccessMessage(null);
 
+    // Validate required fields
+    const requiredFields: (keyof FormData)[] = ['vorname', 'nachname', 'adresse', 'plz', 'ort'];
+    const missingFields = requiredFields.filter(field => !formData[field]);
+
+    if (missingFields.length > 0) {
+      setError(`Bitte füllen Sie die folgenden Felder aus: ${missingFields.join(', ')}`);
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       // Ensure memberid is either a valid number or null if empty
       const updatedData = {
@@ -126,16 +149,6 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
               readOnly
             />
           </div>
-          {/* <div className="flex flex-col">
-            <label htmlFor="Memberid" className="text-sm font-medium text-gray-700">Member id:</label>
-            <input
-              id="Memberid"
-              type="Memberid"
-              value="24"
-              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
-              readOnly
-            />
-          </div> */}
           <div className="flex flex-col">
             <label htmlFor="fanclub" className="text-sm font-medium text-gray-700">Fanclub</label>
             <input
@@ -159,7 +172,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="fullname" className="text-sm font-medium text-gray-700">Nachname *</label>
+            <label htmlFor="nachname" className="text-sm font-medium text-gray-700">Nachname *</label>
             <input
               id="nachname"
               name="nachname"
@@ -195,7 +208,8 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
             <label htmlFor="ort" className="text-sm font-medium text-gray-700">City *</label>
             <input
               id="ort"
-              type="ort"
+              name="ort"
+              type="text"
               value={formData.ort}
               onChange={handleChange}
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
@@ -205,23 +219,13 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
             <label htmlFor="telefon" className="text-sm font-medium text-gray-700">Telefon</label>
             <input
               id="telefon"
-              type="telefon"
+              name="telefon"
+              type="text"
               value={formData.telefon}
               onChange={handleChange}
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
             />
           </div>
-          {/* <div className="flex flex-col">
-            <label htmlFor="memberid" className="text-sm font-medium text-gray-700">Member ID</label>
-            <input
-              id="memberid"
-              name="memberid"
-              type="text"
-              value={formData.memberid}
-              onChange={handleChange}
-              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
-            />
-          </div> */}
           <button
             type="submit"
             disabled={isSubmitting}
