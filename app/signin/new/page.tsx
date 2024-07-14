@@ -28,14 +28,14 @@ const SignUpPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true); // Disable the button while the request is being handled
-    await handleRequest(e, signUp, router);
+    await handleRequest(e, signUp, router, '/account'); // Add '/account' as the redirection path after sign up
     setIsSubmitting(false);
   };
 
   return (
     <div className="flex justify-center height-screen-helper">
-      <div className="flex flex-col justify-between max-w-lg p-3 m-auto w-80 ">
-        <div className="flex justify-center pb-12 ">
+      <div className="flex flex-col justify-between max-w-lg p-3 m-auto w-80">
+        <div className="flex justify-center pb-12">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx8pafgqap2SM8xEJ7AHE8xRdRfJr4ssfhfQ&s"
             width="64px"
@@ -46,9 +46,9 @@ const SignUpPage: React.FC = () => {
         <Card title="Sign Up">
           <div className="my-8">
             <form
-              noValidate={true}
+              noValidate
               className="mb-4"
-              onSubmit={(e) => handleSubmit(e)}
+              onSubmit={handleSubmit}
             >
               <div className="grid gap-2">
                 <div className="grid gap-1">

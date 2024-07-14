@@ -7,24 +7,35 @@ import { handleRequest } from '@/utils/auth-helpers/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-export default function EmailForm({
-  userEmail
-}: {
+interface EmailFormProps {
   userEmail: string | undefined;
-}) {
+}
+
+const EmailForm: React.FC<EmailFormProps> = ({ userEmail }) => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent default form submission
     setIsSubmitting(true);
+    const newEmail = e.currentTarget.newEmail.value;
+
     // Check if the new email is the same as the old email
-    if (e.currentTarget.newEmail.value === userEmail) {
-      e.preventDefault();
+    if (newEmail === userEmail) {
+      setErrorMessage('New email cannot be the same as the current email.');
       setIsSubmitting(false);
       return;
     }
-    handleRequest(e, updateEmail, router);
-    setIsSubmitting(false);
+
+    try {
+      await handleRequest(e, updateEmail, router, 'POST');
+      setErrorMessage(null); // Clear any previous error messages
+    } catch (error) {
+      setErrorMessage('An error occurred while updating the email.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -48,17 +59,21 @@ export default function EmailForm({
       }
     >
       <div className="mt-8 mb-4 text-xl font-semibold">
-        <form id="emailForm" onSubmit={(e) => handleSubmit(e)}>
+        <form id="emailForm" onSubmit={handleSubmit}>
           <input
-            type="text"
+            type="email"
             name="newEmail"
             className="w-1/2 p-3 rounded-md bg-red-800"
             defaultValue={userEmail ?? ''}
             placeholder="Your email"
             maxLength={64}
+            required
           />
+          {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
         </form>
       </div>
     </Card>
   );
-}
+};
+
+export default EmailForm;

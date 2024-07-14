@@ -20,7 +20,7 @@ export default function SignUp({ allowEmail, redirectMethod }: SignUpProps) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true); // Disable the button while the request is being handled
-    await handleRequest(e, signUp, router);
+    await handleRequest(e, signUp, router, '/account'); // Add '/account' as the redirection path after signup
     setIsSubmitting(false);
   };
 
@@ -70,13 +70,6 @@ export default function SignUp({ allowEmail, redirectMethod }: SignUpProps) {
           Sign in with email and password
         </Link>
       </p>
-      {/* {allowEmail && (
-        <p>
-          <Link href="/signin/email_signin" className="font-light text-sm">
-            Sign in via magic link
-          </Link>
-        </p>
-      )} */}
     </div>
   );
 }

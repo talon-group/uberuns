@@ -24,7 +24,7 @@ export default function EmailSignIn({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true); // Disable the button while the request is being handled
-    await handleRequest(e, signInWithEmail, router);
+    await handleRequest(e, signInWithEmail, router, '/account'); // Add '/account' as the redirection path after login
     setIsSubmitting(false);
   };
 

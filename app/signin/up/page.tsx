@@ -12,13 +12,13 @@ const SignUpPage: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [allowEmail, setAllowEmail] = useState(false);
   const [redirectMethod, setRedirectMethod] = useState<string>('');
-  const router = redirectMethod === 'client' ? useRouter() : null;
+  const router = useRouter();
 
   useEffect(() => {
     const fetchSettings = async () => {
-      const { allowEmail } = await getAuthTypes();
+      const authTypes = await getAuthTypes();
       const redirectMethod = await getRedirectMethod();
-      setAllowEmail(allowEmail);
+      setAllowEmail(authTypes.allowEmail);
       setRedirectMethod(redirectMethod);
     };
 
@@ -26,8 +26,9 @@ const SignUpPage: React.FC = () => {
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent the default form submission behavior
     setIsSubmitting(true); // Disable the button while the request is being handled
-    await handleRequest(e, signUp, router);
+    await handleRequest(e, signUp, router, '/account'); // Add '/account' as the redirection path after sign up
     setIsSubmitting(false);
   };
 
@@ -47,10 +48,12 @@ const SignUpPage: React.FC = () => {
             <form
               noValidate={true}
               className="mb-4"
-              onSubmit={(e) => handleSubmit(e)}
+              onSubmit={handleSubmit}
             >
               <div className="grid gap-2">
-                <p className='bg-gray-200'>Use the email that you used when signing up for the Nordkurve under the old system. Create a new password here to use with that email</p>
+                <p className="bg-gray-200">
+                  Use the email that you used when signing up for the Nordkurve under the old system. Create a new password here to use with that email.
+                </p>
                 <div className="grid gap-1">
                   <label htmlFor="email">Email</label>
                   <input

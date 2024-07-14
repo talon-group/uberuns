@@ -18,7 +18,7 @@ export default function UpdatePassword({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true); // Disable the button while the request is being handled
-    await handleRequest(e, updatePassword, router);
+    await handleRequest(e, updatePassword, router, '/account'); // Add '/account' as the redirection path after password update
     setIsSubmitting(false);
   };
 

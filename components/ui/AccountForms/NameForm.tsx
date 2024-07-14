@@ -7,20 +7,33 @@ import { handleRequest } from '@/utils/auth-helpers/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-export default function NameForm({ userName }: { userName: string }) {
+interface NameFormProps {
+  userName: string;
+}
+
+const NameForm: React.FC<NameFormProps> = ({ userName }) => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent default form submission
     setIsSubmitting(true);
+
+    const newName = e.currentTarget.fullName.value;
+
     // Check if the new name is the same as the old name
-    if (e.currentTarget.fullName.value === userName) {
-      e.preventDefault();
+    if (newName === userName) {
       setIsSubmitting(false);
       return;
     }
-    handleRequest(e, updateName, router);
-    setIsSubmitting(false);
+
+    try {
+      await handleRequest(e, updateName, router, 'POST');
+    } catch (error) {
+      console.error('Error updating name:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -42,7 +55,7 @@ export default function NameForm({ userName }: { userName: string }) {
       }
     >
       <div className="mt-8 mb-4 text-xl font-semibold">
-        <form id="nameForm" onSubmit={(e) => handleSubmit(e)}>
+        <form id="nameForm" onSubmit={handleSubmit}>
           <input
             type="text"
             name="fullName"
@@ -50,9 +63,12 @@ export default function NameForm({ userName }: { userName: string }) {
             defaultValue={userName}
             placeholder="Your name"
             maxLength={64}
+            required
           />
         </form>
       </div>
     </Card>
   );
-}
+};
+
+export default NameForm;

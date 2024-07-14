@@ -21,9 +21,16 @@ export default function PasswordSignIn({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent default form submission
     setIsSubmitting(true); // Disable the button while the request is being handled
-    await handleRequest(e, signInWithPassword, router);
-    setIsSubmitting(false);
+
+    try {
+      await handleRequest(e, signInWithPassword, router, 'POST'); // Assuming 'POST' is the method
+    } catch (error) {
+      console.error('Error handling request:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -31,7 +38,7 @@ export default function PasswordSignIn({
       <form
         noValidate={true}
         className="mb-4"
-        onSubmit={(e) => handleSubmit(e)}
+        onSubmit={handleSubmit}
       >
         <div className="grid gap-2">
           <div className="grid gap-1">
@@ -45,6 +52,7 @@ export default function PasswordSignIn({
               autoComplete="email"
               autoCorrect="off"
               className="w-full p-3 rounded-md bg-red-800"
+              required
             />
             <label htmlFor="password">Password</label>
             <input
@@ -54,6 +62,7 @@ export default function PasswordSignIn({
               name="password"
               autoComplete="current-password"
               className="w-full p-3 rounded-md bg-red-200"
+              required
             />
           </div>
           <Button

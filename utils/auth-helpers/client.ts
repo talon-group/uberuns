@@ -7,10 +7,7 @@ import { redirectToPath } from './server';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 export async function handleRequest(
-  e: React.FormEvent<HTMLFormElement>,
-  requestFunc: (formData: FormData) => Promise<string>,
-  router: AppRouterInstance | null = null
-): Promise<boolean | void> {
+e: React.FormEvent<HTMLFormElement>, requestFunc: (formData: FormData) => Promise<string>, router: AppRouterInstance | null = null, p0: string): Promise<boolean | void> {
   // Prevent default form submission refresh
   e.preventDefault();
 
