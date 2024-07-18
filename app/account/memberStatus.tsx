@@ -5,22 +5,16 @@ import { createClient } from '@/utils/supabase/client';
 import { type User } from '@supabase/supabase-js';
 import AccountForm from './data/userData';
 import UserDataDisplay from './data/dataDisplay';
-import Card from '@/components/ui/Card';
+import { useRouter } from 'next/navigation';
 
 export default function UserStatusChecker({ user, userEmail }: { user: User | null, userEmail: any }) {
   const supabase = createClient();
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [isOldUser, setIsOldUser] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-//   const [userEmail, setUserEmail] = useState<string | undefined>(undefined);
 
-//   useEffect(() => {
-//     if (user) {
-//       setUserEmail(user.email); // Fetching user's email from supabase auth
-//     }
-//   }, [user]);
-
-useEffect(() => {
+  useEffect(() => {
     const checkUserStatus = async () => {
       if (!userEmail) {
         setLoading(false);
@@ -41,6 +35,25 @@ useEffect(() => {
         } else {
           setIsOldUser(!!data);
         }
+
+        // Check onboarding and terms status in users table
+        const { data: userData, error: userError } = await supabase
+          .from('users')
+          .select('onboarding, terms')
+          .eq('id', user?.id)
+          .single();
+
+        if (userError) {
+          console.error('Error fetching user data:', userError);
+          return;
+        }
+
+        if (userData.onboarding === null || userData.onboarding === false) {
+          router.push('/account/onboarding');
+        } else if (userData.onboarding === true && (userData.terms === null || userData.terms === false)) {
+          router.push('/account/onboarding/terms');
+        }
+
       } catch (error: any) {
         console.error('Error checking user status:', error.message);
         setIsOldUser(false); // Treat as new user if there's an error
@@ -50,24 +63,20 @@ useEffect(() => {
     };
 
     checkUserStatus();
-  }, [userEmail, supabase]);
+  }, [userEmail, supabase, user, router]);
 
   if (loading) {
     return <p>Loading...</p>;
   }
 
   return (
-      <div className="form-widget space-y-6">
-        {isOldUser ? (
-          <>
-            <AccountForm user={user} />
-          </>
-        ) : (
-          <>
-            <UserDataDisplay user={user} />
-          </>
-        )}
-      </div>
+    <div className="form-widget space-y-6">
+      {isOldUser ? (
+        <AccountForm user={user} />
+      ) : (
+        <UserDataDisplay user={user} />
+      )}
+    </div>
   );
 };
 
@@ -78,6 +87,6 @@ export async function UserStatusCheckerAsPage() {
   } = await supabase.auth.getUser();
 
   return (
-    <UserStatusChecker user={user} userEmail={''} />
+    <UserStatusChecker user={user} userEmail={user?.email} />
   );
 }

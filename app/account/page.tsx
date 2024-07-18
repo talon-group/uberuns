@@ -18,7 +18,7 @@ export default async function Account() {
   const [user, userDetails, subscription] = await Promise.all([
     getUser(supabase),
     getUserDetails(supabase),
-    getSubscription(supabase)
+    getSubscription(supabase),
   ]);
 
   if (!user) {

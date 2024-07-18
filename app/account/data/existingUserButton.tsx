@@ -5,9 +5,13 @@ import { createClient } from '@/utils/supabase/client';
 import { type User } from '@supabase/supabase-js';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
+import AccountForm from './userData';
+import UserDataDisplay from './dataDisplay';
+import { useRouter } from 'next/navigation'; // Import useRouter
 
 export default function ExistingUserButton({ user }: { user: User | null }) {
   const supabase = createClient();
+  const router = useRouter(); // Initialize useRouter
   const [loading, setLoading] = useState(false);
   const [userEmail, setUserEmail] = useState<string | undefined>(undefined);
   const [userDatas, setUserDatas] = useState<any>(null);
@@ -80,10 +84,9 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
           console.error('Error updating user data:', updateUserError);
           throw updateUserError;
         }
-
-        alert('User data updated successfully!');
       } else {
         console.warn('No matching user data found for email:', userEmail);
+        setUserDatas(null); // Ensure no user data is displayed
         setErrorMessage('No user data found for this email.');
       }
     } catch (error: any) {
@@ -100,6 +103,60 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
     }
   }, [userEmail, fetchUserData]);
 
+  const handleNextStep = async () => {
+    if (!user || !user.id) {
+      console.warn("User is not signed in or user ID is undefined");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      // Update the onboarding status
+      const { error } = await supabase
+        .from('users')
+        .update({ onboarding: true })
+        .eq('id', user.id);
+
+      if (error) {
+        throw error;
+      }
+
+      // Redirect to the onboarding terms page
+      router.push('/account/onboarding/terms');
+    } catch (error: any) {
+      console.error('Error updating onboarding status:', error.message);
+      alert('Error updating onboarding status.');
+    } finally {
+      setLoading(false);
+    };
+  };
+
+  // If no user data is found and there's an error, return null
+  if (userDatas === null && errorMessage) {
+    return (
+      <UserDataDisplay user={user} /> 
+    );
+  };
+
+  // If user data is available, render AccountForm
+  if (userDatas) {
+    return (
+      <div className='p-10'>
+        <AccountForm user={user} />
+        <Button
+          variant="slim"
+          onClick={handleNextStep}
+          disabled={loading}
+          className='bg-red-800'
+        >
+          {loading ? 'Loading ...' : 'Next Step'}
+        </Button>
+      </div>
+    );
+  };
+
+  // Render existing UI when loading or showing no data message
   return (
     <Card title="Existing User Data">
       <div className="form-widget space-y-6">
@@ -107,11 +164,7 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
           <p>Loading...</p>
         ) : (
           <>
-            {userDatas ? (
-              <pre>{JSON.stringify(userDatas, null, 2)}</pre>
-            ) : (
-              <p>{errorMessage || 'No user data available'}</p>
-            )}
+            <p>{errorMessage || 'No user data available'}</p>
             <Button
               variant="slim"
               onClick={fetchUserData}
@@ -135,4 +188,4 @@ export async function ExistingUserButtonAsPage() {
   return (
     <ExistingUserButton user={user} />
   );
-};
+}

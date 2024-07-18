@@ -123,7 +123,7 @@ export default function AccountForm({ user }: { user: User | null }) {
       }
     } catch (error: any) {
       console.error('Error loading user data:', error.message);
-      alert('Error loading user data!');
+      // alert('Error loading user data!');
     } finally {
       setLoading(false);
     }
@@ -198,10 +198,10 @@ export default function AccountForm({ user }: { user: User | null }) {
         throw userError;
       }
 
-      alert('Profile updated!');
+      // alert('Profile updated!');
     } catch (error: any) {
       console.error('Error updating profile:', error.message);
-      alert('Error updating profile!');
+      // alert('Error updating profile!');
     } finally {
       setLoading(false);
     }
@@ -234,10 +234,10 @@ export default function AccountForm({ user }: { user: User | null }) {
       }
 
       setMemberId(newMemberId.toString());
-      alert('New Member ID generated!');
+      // alert('New Member ID generated!');
     } catch (error: any) {
       console.error('Error generating member ID:', error.message);
-      alert('Error generating member ID!');
+      // alert('Error generating member ID!');
     } finally {
       setLoading(false);
     }
