@@ -1,11 +1,14 @@
 "use client";
 
+import Link from "next/link";
 import { getPosts } from "../../lib/ghost";
 import { useEffect, useState } from "react";
 
 interface Post {
     id: string;
     title: string;
+    slug: string;
+    html: string; // Include content
 }
 
 const IndexPage = () => {
@@ -25,7 +28,12 @@ const IndexPage = () => {
         <>
             <ul>
                 {posts.map((post) => (
-                    <li key={post.id}>{post.title}</li>
+                    <Link key={post.id} legacyBehavior href={`/newsletter/${post.slug}`}>
+                        <li>
+                            <h2>{post.title}</h2>
+                            <div dangerouslySetInnerHTML={{ __html: post.html }} />
+                        </li>
+                    </Link>
                 ))}
             </ul>
         </>
