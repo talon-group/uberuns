@@ -1,28 +1,35 @@
-"use client"
+"use client";
 
 import { getPosts } from "../../lib/ghost";
+import { useEffect, useState } from "react";
 
-// export async function getStaticProps(context: any) {
-//     const posts = await getPosts()
-  
-//     if (!posts) {
-//       return {
-//         notFound: true,
-//       }
-//     }
-  
-//     return {
-//       props: { posts }
-//     }
-//   }
+interface Post {
+    id: string;
+    title: string;
+}
 
-  const IndexPage = (props: any) => (
-    // <ul>
-    //   {props.posts.map(post => (
-    //     <li key={post.id}>{post.title}</li>
-    //   ))}
-    // </ul>
-    <>p</>
-  );
+const IndexPage = () => {
+    const [posts, setPosts] = useState<Post[]>([]);
 
-  export default IndexPage;
+    useEffect(() => {
+        async function fetchPosts() {
+            const postsData = await getPosts();
+            if (postsData) {
+                setPosts(postsData);
+            }
+        }
+        fetchPosts();
+    }, []);
+
+    return (
+        <>
+            <ul>
+                {posts.map((post) => (
+                    <li key={post.id}>{post.title}</li>
+                ))}
+            </ul>
+        </>
+    );
+};
+
+export default IndexPage;
