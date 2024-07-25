@@ -3,75 +3,85 @@
 import Link from 'next/link';
 import { SignOut } from '@/utils/auth-helpers/server';
 import { handleRequest } from '@/utils/auth-helpers/client';
-import Logo from '@/components/icons/Logo';
+import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { getRedirectMethod } from '@/utils/auth-helpers/settings';
-import s from './Navbar.module.css';
 
 interface NavlinksProps {
   user?: any;
 }
 
 export default function Navlinks({ user }: NavlinksProps) {
-  const router = getRedirectMethod() === 'client' ? useRouter() : null;
+  const router = useRouter();
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSignOut = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent default form submission
-    if (router) {
-      await handleRequest(e, SignOut, router, 'POST'); // Assuming 'POST' is the method
-    }
+    await handleRequest(e, SignOut, router, 'POST'); // Assuming 'POST' is the method
   };
 
   return (
-    <div className="relative flex flex-row justify-between py-4 align-center md:py-6">
-      <div className="flex items-center flex-1">
-        <Link href="/" className={s.logo} aria-label="Logo">
+    <nav className="relative flex flex-col md:flex-row justify-between items-center py-4 md:py-6">
+      <div className="flex items-center justify-between w-full md:w-auto">
+        <Link href="/" className="flex items-center" aria-label="Logo">
           {/* <Logo /> */}
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx8pafgqap2SM8xEJ7AHE8xRdRfJr4ssfhfQ&s" height="32px" width="32px" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx8pafgqap2SM8xEJ7AHE8xRdRfJr4ssfhfQ&s" alt="Logo" height="32px" width="32px" />
         </Link>
-        <nav className="ml-6 space-x-2 lg:block">
-          {/* <Link href="/newsletter" className={s.link}> {/* https://nordkurve12.vercel.app 
-            Newsletter
-          </Link> */}
-          <Link href="/about/" className={s.link}>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden flex items-center px-3 py-2 border rounded text-gray-500 border-gray-400 hover:text-gray-900 hover:border-gray-900"
+          aria-label="Toggle navigation"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+      <div className={`md:flex md:items-center ${isOpen ? 'block' : 'hidden'}`}>
+        <nav className="flex flex-col md:flex-row md:space-x-4 mt-4 md:mt-0">
+          {/* <Link href="/newsletter" className="block md:inline-block text-gray-700 hover:text-gray-900">Newsletter</Link> */}
+          <Link href="/about/" className="block md:inline-block text-gray-700 hover:text-gray-900">
             ÜBER UNS
           </Link>
-          <Link href="/about/reines" className={s.link}>
+          <Link href="/about/reines" className="block md:inline-block text-gray-700 hover:text-gray-900">
             REINES GEWISSEN
           </Link>
-          <Link href="/about/podcast" className={s.link}>
+          <Link href="/about/podcast" className="block md:inline-block text-gray-700 hover:text-gray-900">
             PODCAST
           </Link>
-          <Link href="/about/fussballroute" className={s.link}>
+          <Link href="/about/fussballroute" className="block md:inline-block text-gray-700 hover:text-gray-900">
             FUSSBALLROUTE
           </Link>
-          <Link href="/about/stadioneck" className={s.link}>
+          <Link href="/about/stadioneck" className="block md:inline-block text-gray-700 hover:text-gray-900">
             STADIONECK
           </Link>
         </nav>
-      </div>
-      <div className="flex justify-end space-x-8">
-        {user ? (
-          <>
-            <Link href="/account" className={s.link}>
-              Account
-            </Link>
-            <form onSubmit={handleSignOut}>
-              <input type="hidden" name="pathName" value={pathname ?? ''} />
-              <button type="submit" className={s.link}>
-                Sign out
-              </button>
-            </form>
-          </>
-        ) : (
-          <>
-            <Link href="/signin" className={s.link}>
+        <div className="mt-4 md:mt-0 md:ml-auto">
+          {user ? (
+            <>
+              <Link href="/account" className="block md:inline-block text-gray-700 hover:text-gray-900">
+                Account
+              </Link>
+              <form onSubmit={handleSignOut} className="inline-block">
+                <input type="hidden" name="pathName" value={pathname ?? ''} />
+                <button type="submit" className="block text-gray-700 hover:text-gray-900">
+                  Sign out
+                </button>
+              </form>
+            </>
+          ) : (
+            <Link href="/signin" className="block md:inline-block text-gray-700 hover:text-gray-900">
               Sign In
             </Link>
-          </>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+    </nav>
   );
 }
