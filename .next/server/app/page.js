@@ -1,0 +1,11 @@
+const CHUNK_PUBLIC_PATH = "server/app/page.js";
+const runtime = require("../chunks/ssr/[turbopack]_runtime.js");
+runtime.loadChunk("server/chunks/ssr/_df8c08._.js");
+runtime.loadChunk("server/chunks/ssr/node_modules_next_021124._.js");
+runtime.loadChunk("server/chunks/ssr/node_modules_tr46_1a859a._.js");
+runtime.loadChunk("server/chunks/ssr/node_modules_@supabase_auth-js_dist_module_fa20a4._.js");
+runtime.loadChunk("server/chunks/ssr/node_modules_stripe_esm_21dd88._.js");
+runtime.loadChunk("server/chunks/ssr/node_modules_5f5b41._.js");
+runtime.loadChunk("server/chunks/ssr/node_modules_b612a2._.js");
+runtime.getOrInstantiateRuntimeModule("[project]/.next-internal/server/app/page/actions.js { ACTIONS_MODULE0 => \"[project]/utils/stripe/server.ts [app-rsc] (ecmascript, action, ecmascript)\", ACTIONS_MODULE1 => \"[project]/utils/auth-helpers/server.ts [app-rsc] (ecmascript, action, ecmascript)\" } [app-rsc] (ecmascript)", CHUNK_PUBLIC_PATH);
+module.exports = runtime.getOrInstantiateRuntimeModule("[project]/node_modules/next/dist/esm/build/templates/app-page.js?page=/page { COMPONENT_0 => \"[project]/app/layout.tsx [app-rsc] (ecmascript, Next.js server component)\", COMPONENT_1 => \"[project]/node_modules/next/dist/client/components/not-found-error.js [app-rsc] (ecmascript, Next.js server component)\", COMPONENT_2 => \"[project]/app/page.tsx [app-rsc] (ecmascript, Next.js server component)\", METADATA_3 => \"[project]/app/opengraph-image.png.mjs { IMAGE => \\\"[project]/app/opengraph-image.png [app-rsc] (static)\\\" } [app-rsc] (structured image object, ecmascript)\" } [app-rsc] (ecmascript) <facade>", CHUNK_PUBLIC_PATH).exports;

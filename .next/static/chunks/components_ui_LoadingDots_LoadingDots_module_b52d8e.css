@@ -1,0 +1,44 @@
+/* [project]/components/ui/LoadingDots/LoadingDots.module.css [app-client] (css) */
+.LoadingDots-module__yaQm_a__root {
+  display: inline-flex;
+  align-items: center;
+  text-align: center;
+  line-height: 1.75rem;
+}
+
+.LoadingDots-module__yaQm_a__root span {
+  height: .5rem;
+  width: .5rem;
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(228 228 231 / var(--tw-bg-opacity));
+  animation-name: LoadingDots-module__yaQm_a__blink;
+  animation-duration: 1.4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  margin: 0 2px;
+}
+
+.LoadingDots-module__yaQm_a__root span:nth-of-type(2) {
+  animation-delay: .2s;
+}
+
+.LoadingDots-module__yaQm_a__root span:nth-of-type(3) {
+  animation-delay: .4s;
+}
+
+@keyframes LoadingDots-module__yaQm_a__blink {
+  0% {
+    opacity: .2;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: .2;
+  }
+}
+
+/*# sourceMappingURL=components_ui_LoadingDots_LoadingDots_module_b52d8e.css.map*/

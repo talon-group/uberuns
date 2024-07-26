@@ -1,0 +1,67 @@
+/* [project]/components/ui/Navbar/Navbar.module.css [app-ssr] (css) */
+.Navbar-module__uj6e0q__root {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  height: 4rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  transition-property: all;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  transition-duration: .15s;
+  animation-duration: .15s;
+}
+
+@media (width >= 768px) {
+  .Navbar-module__uj6e0q__root {
+    height: 5rem;
+  }
+}
+
+.Navbar-module__uj6e0q__link {
+  display: inline-flex;
+  cursor: pointer;
+  align-items: center;
+  border-radius: .375rem;
+  padding: .25rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity));
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-duration: 75ms;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  animation-duration: 75ms;
+  animation-timing-function: cubic-bezier(.4, 0, .2, 1);
+}
+
+.Navbar-module__uj6e0q__link:hover {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
+}
+
+.Navbar-module__uj6e0q__link:focus {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
+  outline: 2px solid #0000;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: rgb(239 68 68 / var(--tw-ring-opacity));
+  --tw-ring-opacity: .5;
+}
+
+.Navbar-module__uj6e0q__logo {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  cursor: pointer;
+  border-radius: 9999px;
+  transition-duration: .1s;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  animation-duration: .1s;
+  animation-timing-function: cubic-bezier(.4, 0, .2, 1);
+}
+
+/*# sourceMappingURL=components_ui_Navbar_Navbar_module_31ffea.css.map*/
