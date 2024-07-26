@@ -23,12 +23,29 @@ export default function Navlinks({ user }: NavlinksProps) {
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx8pafgqap2SM8xEJ7AHE8xRdRfJr4ssfhfQ&s" height="32px" width="32px" />
         </Link>
         <nav className="ml-6 space-x-2 lg:block">
-          <Link href="/newsletter" className={s.link}> {/* https://nordkurve12.vercel.app */}
+          {/* <Link href="/newsletter" className={s.link}> {/* https://nordkurve12.vercel.app 
             Newsletter
+          </Link> */}
+          <Link href="/about/" className={s.link}>
+            ÜBER UNS
           </Link>
-          <Link href="https://nk12shop.vercel.app" className={s.link}>
-            Store
+          <Link href="/about/reines" className={s.link}>
+            REINES GEWISSEN
           </Link>
+          <Link href="/about/podcast" className={s.link}>
+            PODCAST
+          </Link>
+          <Link href="/about/fussballroute" className={s.link}>
+            FUSSBALLROUTE
+          </Link>
+          <Link href="/about/stadioneck" className={s.link}>
+            STADIONECK
+          </Link>
+          {user && (
+            <Link href="https://nk12shop.vercel.app" className={s.link}>
+              Store
+            </Link>
+          )}
           {user && (
             <Link href="/account" className={s.link}>
               Account

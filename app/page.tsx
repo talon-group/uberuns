@@ -22,7 +22,7 @@ export default async function PricingPage() {
         products={products ?? []}
         subscription={subscription}
       />
-      <HomeContent />
+      {/* <HomeContent /> */}
     </>
   );
 }
