@@ -57,21 +57,17 @@ useEffect(() => {
   }
 
   return (
-    <Card title="User Status">
       <div className="form-widget space-y-6">
         {isOldUser ? (
           <>
-            <p>You are an existing user.</p>
             <AccountForm user={user} />
           </>
         ) : (
           <>
-            <p>You are a new user.</p>
             <UserDataDisplay user={user} />
           </>
         )}
       </div>
-    </Card>
   );
 };
 

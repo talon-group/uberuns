@@ -16,7 +16,9 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
     nachname: '',
     vorname: '',
     adresse: '',
+    telefon: '',
     plz: '',
+    ort: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -48,6 +50,8 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
           nachname: data.nachname || '',
           vorname: data.vorname || '',
           adresse: data.adresse || '',
+          telefon: data.telefon || '',
+          ort: data.ort || '',
           plz: data.plz || '',
         });
       } catch (error: any) {
@@ -108,6 +112,9 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
       <div className="form-widget space-y-6">
         {successMessage && <p className="text-green-600">{successMessage}</p>}
         {error && <p className="text-red-600">{error}</p>}
+        <h1 className="text-xl font-extrabold text-black sm:text-center sm:text-xl">
+            {/* Welcome to your Nordkurve account! Please fill in your information */}
+          </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex flex-col">
             <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>
@@ -120,7 +127,28 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="vorname" className="text-sm font-medium text-gray-700">Vorname</label>
+            <label htmlFor="Memberid" className="text-sm font-medium text-gray-700">Member id:</label>
+            <input
+              id="Memberid"
+              type="Memberid"
+              value="24"
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
+              readOnly
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="fanclub" className="text-sm font-medium text-gray-700">Fanclub</label>
+            <input
+              id="fanclub"
+              name="fanclub"
+              type="text"
+              value={formData.fanclub}
+              onChange={handleChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="vorname" className="text-sm font-medium text-gray-700">Vorname *</label>
             <input
               id="vorname"
               name="vorname"
@@ -131,12 +159,54 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="fullname" className="text-sm font-medium text-gray-700">Nachname</label>
+            <label htmlFor="fullname" className="text-sm font-medium text-gray-700">Nachname *</label>
             <input
               id="nachname"
               name="nachname"
               type="text"
               value={formData.nachname}
+              onChange={handleChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="adresse" className="text-sm font-medium text-gray-700">Adresse *</label>
+            <input
+              id="adresse"
+              name="adresse"
+              type="text"
+              value={formData.adresse}
+              onChange={handleChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="plz" className="text-sm font-medium text-gray-700">PLZ *</label>
+            <input
+              id="plz"
+              name="plz"
+              type="text"
+              value={formData.plz}
+              onChange={handleChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="ort" className="text-sm font-medium text-gray-700">City *</label>
+            <input
+              id="ort"
+              type="ort"
+              value={formData.ort}
+              onChange={handleChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="telefon" className="text-sm font-medium text-gray-700">Telefon</label>
+            <input
+              id="telefon"
+              type="telefon"
+              value={formData.telefon}
               onChange={handleChange}
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
             />
@@ -152,39 +222,6 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
             />
           </div> */}
-          <div className="flex flex-col">
-            <label htmlFor="fanclub" className="text-sm font-medium text-gray-700">Fanclub</label>
-            <input
-              id="fanclub"
-              name="fanclub"
-              type="text"
-              value={formData.fanclub}
-              onChange={handleChange}
-              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
-            />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="adresse" className="text-sm font-medium text-gray-700">Adresse</label>
-            <input
-              id="adresse"
-              name="adresse"
-              type="text"
-              value={formData.adresse}
-              onChange={handleChange}
-              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
-            />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="plz" className="text-sm font-medium text-gray-700">PLZ</label>
-            <input
-              id="plz"
-              name="plz"
-              type="text"
-              value={formData.plz}
-              onChange={handleChange}
-              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
-            />
-          </div>
           <button
             type="submit"
             disabled={isSubmitting}

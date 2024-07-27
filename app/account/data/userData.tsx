@@ -276,7 +276,7 @@ export default function AccountForm({ user }: { user: User | null }) {
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
             />
           </div>
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             <label htmlFor="fullname" className="text-sm font-medium text-gray-700">Full Name</label>
             <input
               id="fullname"
@@ -286,25 +286,19 @@ export default function AccountForm({ user }: { user: User | null }) {
               onChange={(e) => setFullname(e.target.value)}
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
             />
-          </div>
-          {/* <div className="flex flex-col">
+          </div> */}
+          <div className="flex flex-col">
             <label htmlFor="memberid" className="text-sm font-medium text-gray-700">Member ID</label>
             <input
               id="memberid"
               name="memberid"
               type="text"
-              value={memberId}
+              value="24"
+              readOnly
               onChange={(e) => setMemberId(e.target.value)}
-              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500 bg-gray-100"
             />
-            <button
-              type="button"
-              onClick={generateMemberId}
-              className="mt-2 px-4 py-2 bg-pink-600 text-white rounded-md hover:bg-pink-700"
-            >
-              Generate Member ID
-            </button>
-          </div> */}
+          </div>
           <div className="flex flex-col">
             <label htmlFor="fanclub" className="text-sm font-medium text-gray-700">Fanclub</label>
             <input
@@ -317,7 +311,7 @@ export default function AccountForm({ user }: { user: User | null }) {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="nachname" className="text-sm font-medium text-gray-700">Nachname</label>
+            <label htmlFor="nachname" className="text-sm font-medium text-gray-700">Nachname *</label>
             <input
               id="nachname"
               name="nachname"
@@ -328,7 +322,7 @@ export default function AccountForm({ user }: { user: User | null }) {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="vorname" className="text-sm font-medium text-gray-700">Vorname</label>
+            <label htmlFor="vorname" className="text-sm font-medium text-gray-700">Vorname *</label>
             <input
               id="vorname"
               name="vorname"
@@ -339,7 +333,7 @@ export default function AccountForm({ user }: { user: User | null }) {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="adresse" className="text-sm font-medium text-gray-700">Adresse</label>
+            <label htmlFor="adresse" className="text-sm font-medium text-gray-700">Adresse *</label>
             <input
               id="adresse"
               name="adresse"
@@ -350,12 +344,23 @@ export default function AccountForm({ user }: { user: User | null }) {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="plz" className="text-sm font-medium text-gray-700">PLZ</label>
+            <label htmlFor="plz" className="text-sm font-medium text-gray-700">PLZ *</label>
             <input
               id="plz"
               name="plz"
               type="text"
               value={userDatas?.plz || ''}
+              onChange={handleInputChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="ort" className="text-sm font-medium text-gray-700">Ort/City *</label>
+            <input
+              id="ort"
+              name="ort"
+              type="text"
+              value={userDatas?.ort || ''}
               onChange={handleInputChange}
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
             />

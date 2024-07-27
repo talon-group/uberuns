@@ -10,6 +10,8 @@ import {
 } from '@/utils/supabase/queries';
 import AccountForm, { AccountFormAsPage } from './data/userData';
 import UserStatusChecker from './memberStatus';
+import UserNavbar from './userNav';
+import SignUpForCoach from '@/components/ui/AccountForms/SignUpForCoach';
 
 export default async function Account() {
   const supabase = createClient();
@@ -25,6 +27,7 @@ export default async function Account() {
 
   return (
     <section className="mb-32 bg-white">
+      {/* <UserNavbar /> */}
       <div className="max-w-6xl px-4 py-8 mx-auto sm:px-6 sm:pt-24 lg:px-8">
         <div className="sm:align-center sm:flex sm:flex-col">
           <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
@@ -39,6 +42,7 @@ export default async function Account() {
       <div className="p-4">
         <CustomerPortalForm subscription={subscription} />
         <EmailForm userEmail={user.email} />
+        <SignUpForCoach subscription={subscription} />
       </div>
       {/* <AccountFormAsPage /> */}
       <UserStatusChecker user={user} userEmail={user.email} />

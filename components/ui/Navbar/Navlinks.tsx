@@ -41,16 +41,6 @@ export default function Navlinks({ user }: NavlinksProps) {
           <Link href="/about/stadioneck" className={s.link}>
             STADIONECK
           </Link>
-          {user && (
-            <Link href="https://nk12shop.vercel.app" className={s.link}>
-              Store
-            </Link>
-          )}
-          {user && (
-            <Link href="/account" className={s.link}>
-              Account
-            </Link>
-          )}
         </nav>
       </div>
       <div className="flex justify-end space-x-8">
@@ -62,9 +52,14 @@ export default function Navlinks({ user }: NavlinksProps) {
             </button>
           </form>
         ) : (
-          <Link href="/signin" className={s.link}>
-            Sign In
-          </Link>
+          <>
+            <Link href="/signin" className={s.link}>
+              Sign In (new member)
+            </Link>
+            <Link href="/signin" className={s.link}>
+              Sign In (existing member)
+            </Link>
+          </>
         )}
       </div>
     </div>
