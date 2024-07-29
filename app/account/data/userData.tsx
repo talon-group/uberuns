@@ -5,7 +5,7 @@ import { createClient } from '@/utils/supabase/client';
 import { type User } from '@supabase/supabase-js';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
-
+ 
 export default function AccountForm({ user }: { user: User | null }) {
   const supabase = createClient();
   const [loading, setLoading] = useState(true);

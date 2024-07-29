@@ -49,18 +49,18 @@ export default function CustomerPortalForm({ subscription }: Props) {
       title="Your Plan"
       description={
         subscription
-          ? `You are currently on the ${subscription?.prices?.products?.name} plan.`
-          : 'You are not currently subscribed to any plan.'
+          ? `Membership: Nordkurve Season Membership`
+          : 'You are not currently a subscribed member this season'
       }
       footer={
-        <div className="flex flex-col items-start justify-between sm:flex-row sm:items-center">
-          <p className="pb-4 sm:pb-0">Manage your subscription on Stripe.</p>
+        <div className="flex flex-col items-start justify-between text-white sm:flex-row sm:items-center">
+          <p className="pb-4 sm:pb-0"></p>
           <Button
             variant="slim"
             onClick={handleStripePortalRequest}
             loading={isSubmitting}
           >
-            Open customer portal
+            Manage your membership
           </Button>
         </div>
       }
@@ -69,7 +69,7 @@ export default function CustomerPortalForm({ subscription }: Props) {
         {subscription ? (
           `${subscriptionPrice}/${subscription?.prices?.interval}`
         ) : (
-          <Link href="/">Choose your plan</Link>
+          <Link href="/">Pay your membership fees</Link>
         )}
       </div>
     </Card>

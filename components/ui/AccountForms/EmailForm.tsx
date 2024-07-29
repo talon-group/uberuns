@@ -33,7 +33,7 @@ export default function EmailForm({
       description="Please enter the email address you want to use to login."
       footer={
         <div className="flex flex-col items-start justify-between sm:flex-row sm:items-center">
-          <p className="pb-4 sm:pb-0">
+          <p className="pb-4 sm:pb-0 text-white">
             We will email you to verify the change.
           </p>
           <Button
@@ -52,7 +52,7 @@ export default function EmailForm({
           <input
             type="text"
             name="newEmail"
-            className="w-1/2 p-3 rounded-md bg-zinc-800"
+            className="w-1/2 p-3 rounded-md bg-red-800"
             defaultValue={userEmail ?? ''}
             placeholder="Your email"
             maxLength={64}
