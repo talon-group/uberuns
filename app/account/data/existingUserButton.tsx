@@ -44,6 +44,44 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
       if (data) {
         setUserDatas(data);
         console.log('User data fetched successfully:', data);
+
+        // Determine new member ID
+        let newMemberId = data.id; // Default to old member ID if it exists
+
+        if (!data.memberid) {
+          // Generate new member ID for new users
+          const { data: highestMemberIdData, error: highestMemberIdError } = await supabase
+            .from('users')
+            .select('memberid')
+            .order('memberid', { ascending: false })
+            .limit(1)
+            .single();
+
+          if (highestMemberIdError) {
+            throw highestMemberIdError;
+          }
+
+          newMemberId = (highestMemberIdData ? highestMemberIdData.memberid : 0) + 1;
+        }
+
+        console.log('Setting new member ID:', newMemberId);
+
+        // Update the user entry in users table
+        const { error: updateUserError } = await supabase
+          .from('users')
+          .update({
+            full_name: data.full_name,
+            memberid: newMemberId,
+            userdatas: data.id
+          })
+          .eq('id', user.id);
+
+        if (updateUserError) {
+          console.error('Error updating user data:', updateUserError);
+          throw updateUserError;
+        }
+
+        alert('User data updated successfully!');
       } else {
         console.warn('No matching user data found for email:', userEmail);
         setErrorMessage('No user data found for this email.');
@@ -97,4 +135,4 @@ export async function ExistingUserButtonAsPage() {
   return (
     <ExistingUserButton user={user} />
   );
-}
+};

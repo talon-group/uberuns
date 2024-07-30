@@ -9,6 +9,7 @@ import {
   getUser
 } from '@/utils/supabase/queries';
 import AccountForm, { AccountFormAsPage } from './data/userData';
+import UserStatusChecker from './memberStatus';
 
 export default async function Account() {
   const supabase = createClient();
@@ -39,7 +40,8 @@ export default async function Account() {
         <CustomerPortalForm subscription={subscription} />
         <EmailForm userEmail={user.email} />
       </div>
-      <AccountFormAsPage />
+      {/* <AccountFormAsPage /> */}
+      <UserStatusChecker user={user} userEmail={user.email} />
     </section>
   );
 }

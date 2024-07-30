@@ -287,7 +287,7 @@ export default function AccountForm({ user }: { user: User | null }) {
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
             />
           </div>
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             <label htmlFor="memberid" className="text-sm font-medium text-gray-700">Member ID</label>
             <input
               id="memberid"
@@ -304,7 +304,7 @@ export default function AccountForm({ user }: { user: User | null }) {
             >
               Generate Member ID
             </button>
-          </div>
+          </div> */}
           <div className="flex flex-col">
             <label htmlFor="fanclub" className="text-sm font-medium text-gray-700">Fanclub</label>
             <input
@@ -360,7 +360,7 @@ export default function AccountForm({ user }: { user: User | null }) {
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
             />
           </div>
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             <label htmlFor="e_mail" className="text-sm font-medium text-gray-700">E-Mail</label>
             <input
               id="e_mail"
@@ -370,7 +370,7 @@ export default function AccountForm({ user }: { user: User | null }) {
               onChange={handleInputChange}
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </Card>
