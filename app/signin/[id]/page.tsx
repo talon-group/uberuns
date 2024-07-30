@@ -58,7 +58,8 @@ export default async function SignIn({
     <div className="flex justify-center height-screen-helper">
       <div className="flex flex-col justify-between max-w-lg p-3 m-auto w-80 ">
         <div className="flex justify-center pb-12 ">
-          <Logo width="64px" height="64px" />
+          {/* <Logo width="64px" height="64px" /> */}
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx8pafgqap2SM8xEJ7AHE8xRdRfJr4ssfhfQ&s" width="64px" height="64px" />
         </div>
         <Card
           title={
@@ -97,14 +98,14 @@ export default async function SignIn({
           {viewProp === 'signup' && (
             <SignUp allowEmail={allowEmail} redirectMethod={redirectMethod} />
           )}
-          {viewProp !== 'update_password' &&
+          {/* {viewProp !== 'update_password' &&
             viewProp !== 'signup' &&
             allowOauth && (
               <>
                 <Separator text="Third-party sign-in" />
                 <OauthSignIn />
               </>
-            )}
+            )} */}
         </Card>
       </div>
     </div>

@@ -38,7 +38,7 @@ export default function UpdatePassword({
               type="password"
               name="password"
               autoComplete="current-password"
-              className="w-full p-3 rounded-md bg-zinc-800"
+              className="w-full p-3 rounded-md bg-zinc-200"
             />
             <label htmlFor="passwordConfirm">Confirm New Password</label>
             <input
