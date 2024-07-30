@@ -1,15 +1,22 @@
 -- Add only the missing fields to the users table
-ALTER TABLE public.users
-ADD COLUMN address text NULL,
-ADD COLUMN telefon text NULL,
-ADD COLUMN fanclub text NULL,
-ADD COLUMN alter integer NULL;
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'users' AND column_name = 'address') THEN
+        ALTER TABLE public.users ADD COLUMN address text NULL;
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'users' AND column_name = 'fanclub') THEN
+        ALTER TABLE public.users ADD COLUMN fanclub text NULL;
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'users' AND column_name = 'alter') THEN
+        ALTER TABLE public.users ADD COLUMN alter integer NULL;
+    END IF;
+END $$;
 
--- Update the existing memberid column to reference userdatas.id
+-- Drop the existing memberid column
 ALTER TABLE public.users
-DROP COLUMN memberid;
+DROP COLUMN IF EXISTS memberid;
 
--- Create new field for memberid which takes the value from userdatas.id
+-- Create a new memberid column that references userdatas.id
 ALTER TABLE public.users
 ADD COLUMN memberid bigint REFERENCES public.userdatas(id);
 

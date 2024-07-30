@@ -1,62 +1,100 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import { type User } from '@supabase/supabase-js';
 import Button from '@/components/ui/Button';
+import Card from '@/components/ui/Card';
 
 export default function ExistingUserButton({ user }: { user: User | null }) {
   const supabase = createClient();
   const [loading, setLoading] = useState(false);
+  const [userEmail, setUserEmail] = useState<string | undefined>(undefined);
+  const [userDatas, setUserDatas] = useState<any>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleExistingUserCheck = async () => {
-    if (!user) return;
+  useEffect(() => {
+    if (user) {
+      setUserEmail(user.email); // Fetching user's email from supabase auth
+    }
+  }, [user]);
 
-    setLoading(true);
+  const fetchUserData = useCallback(async () => {
+    if (!user || !userEmail) {
+      console.warn("User is not signed in or email is undefined");
+      return;
+    }
 
     try {
-      const { data: existingUserData, error } = await supabase
+      setLoading(true);
+      console.log("Fetching user data for email:", userEmail);
+
+      // Fetch user data from userdatas table by email
+      const { data, error, status } = await supabase
         .from('userdatas')
         .select('*')
-        .eq('e_mail', user.email)
+        .eq('e_mail', userEmail)
         .single();
 
-      if (error || !existingUserData) {
-        console.warn('No matching email found in userdatas table');
-        return;
+      if (error && status !== 406) {
+        console.error('Error fetching user data:', error);
+        throw error;
       }
 
-      const { nachname, vorname, e_mail, adresse, plz, memberid, fanclub } = existingUserData;
-
-      const { error: updateError } = await supabase
-        .from('users')
-        .update({
-          full_name: `${vorname} ${nachname}`,
-          email: e_mail,
-          address: adresse,
-          postal_code: plz,
-          member_id: memberid,
-          fanclub,
-          userdatas: existingUserData.id, // Only update the userdatas id field
-        })
-        .eq('id', user.id);
-
-      if (updateError) {
-        throw updateError;
+      if (data) {
+        setUserDatas(data);
+        console.log('User data fetched successfully:', data);
+      } else {
+        console.warn('No matching user data found for email:', userEmail);
+        setErrorMessage('No user data found for this email.');
       }
-
-      alert('User data imported successfully!');
     } catch (error: any) {
-      console.error('Error importing user data:', error.message);
-      alert('Error importing user data!');
+      console.error('Error loading user data:', error.message);
+      setErrorMessage('Error loading user data!');
     } finally {
       setLoading(false);
     }
-  };
+  }, [user, userEmail, supabase]);
+
+  useEffect(() => {
+    if (userEmail) {
+      fetchUserData();
+    }
+  }, [userEmail, fetchUserData]);
 
   return (
-    <Button variant="slim" onClick={handleExistingUserCheck} disabled={loading}>
-      {loading ? 'Loading ...' : 'Existing users click here'}
-    </Button>
+    <Card title="Existing User Data">
+      <div className="form-widget space-y-6">
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <>
+            {userDatas ? (
+              <pre>{JSON.stringify(userDatas, null, 2)}</pre>
+            ) : (
+              <p>{errorMessage || 'No user data available'}</p>
+            )}
+            <Button
+              variant="slim"
+              onClick={fetchUserData}
+              disabled={loading}
+            >
+              {loading ? 'Loading ...' : 'Fetch Data'}
+            </Button>
+          </>
+        )}
+      </div>
+    </Card>
+  );
+}
+
+export async function ExistingUserButtonAsPage() {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  return (
+    <ExistingUserButton user={user} />
   );
 }
