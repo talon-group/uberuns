@@ -6,6 +6,7 @@ import {
   getUser
 } from '@/utils/supabase/queries';
 import HomeContent from './homeContent';
+import CallToActionGrid from './signin/cta';
 
 export default async function PricingPage() {
   const supabase = createClient();
@@ -22,6 +23,7 @@ export default async function PricingPage() {
         products={products ?? []}
         subscription={subscription}
       />
+      <CallToActionGrid />
       {/* <HomeContent /> */}
     </>
   );

@@ -379,6 +379,7 @@ export default function AccountForm({ user }: { user: User | null }) {
         </div>
       </div>
     </Card>
+    // HAS COMPLETED ONBOARDING FIELD - CAN BE ACROSS BOTH TABLES
   );
 }
 

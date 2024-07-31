@@ -13,7 +13,7 @@ export default function Footer() {
             className="flex items-center flex-initial font-bold md:mr-24"
           >
             <span className="mr-2 border rounded-full border-zinc-700">
-              <Logo />
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx8pafgqap2SM8xEJ7AHE8xRdRfJr4ssfhfQ&s" width="64px" height="64px" />
             </span>
             <span>Nordkurve 12 e.V.</span>
           </Link>
@@ -81,6 +81,7 @@ export default function Footer() {
         </div>
         <div className="flex items-start col-span-1 text-white lg:col-span-6 lg:justify-end">
           <div className="flex items-center h-10 space-x-6">
+            {/* <span className='text-white'>Source code for website: </span> */}
             <a
               aria-label="Github"
               href="https://github.com/talon-group"
@@ -92,7 +93,7 @@ export default function Footer() {
       </div>
       <div className="flex flex-col items-center justify-between py-12 space-y-4 md:flex-row bg-zinc-900">
         <div>
-          <span>
+          <span className='text-white'>
             &copy; {new Date().getFullYear()} Designed by Liam Arbuckle (Talonova Aerospace) in Australia. 🇦🇺 🤝 🇩🇪
           </span>
         </div>
