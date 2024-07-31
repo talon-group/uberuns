@@ -1,43 +1,19 @@
-"use client";
+import { createClient } from "@/utils/supabase/server";
+import { getUserDetails, getSubscription, getUser } from '@/utils/supabase/queries';
+import NewsletterPosts from "./NewsComponent";
+import { redirect } from 'next/navigation';
 
-import Link from "next/link";
-import { getPosts } from "../../lib/ghost";
-import { useEffect, useState } from "react";
+export default async function IndexPage() {
+  const supabase = createClient();
+  const [user, userDetails, subscription] = await Promise.all([
+    getUser(supabase),
+    getUserDetails(supabase),
+    getSubscription(supabase)
+  ]);
 
-interface Post {
-    id: string;
-    title: string;
-    slug: string;
-    html: string; // Include content
-}
+  if (!user) {
+    redirect('/signin');
+  }
 
-const IndexPage = () => {
-    const [posts, setPosts] = useState<Post[]>([]);
-
-    useEffect(() => {
-        async function fetchPosts() {
-            const postsData = await getPosts();
-            if (postsData) {
-                setPosts(postsData);
-            }
-        }
-        fetchPosts();
-    }, []);
-
-    return (
-        <>
-            <ul>
-                {posts.map((post) => (
-                    <Link key={post.id} legacyBehavior href={`/newsletter/${post.slug}`}>
-                        <li>
-                            <h2>{post.title}</h2>
-                            <div dangerouslySetInnerHTML={{ __html: post.html }} />
-                        </li>
-                    </Link>
-                ))}
-            </ul>
-        </>
-    );
+  return <NewsletterPosts />;
 };
-
-export default IndexPage;

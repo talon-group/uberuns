@@ -1,3 +1,5 @@
+
+
 import Pricing from '@/components/ui/Pricing/Pricing';
 import { createClient } from '@/utils/supabase/server';
 import {
@@ -7,6 +9,8 @@ import {
 } from '@/utils/supabase/queries';
 import HomeContent from './homeContent';
 import CallToActionGrid from './signin/cta';
+import NewsletterPosts from './newsletter/NewsComponent';
+import ShortNewsletterPosts from './newsletter/ShortenedNewsComp';
 
 export default async function PricingPage() {
   const supabase = createClient();
@@ -23,7 +27,8 @@ export default async function PricingPage() {
         products={products ?? []}
         subscription={subscription}
       />
-      <CallToActionGrid />
+      {!user && <CallToActionGrid />}
+      <ShortNewsletterPosts />
       {/* <HomeContent /> */}
     </>
   );

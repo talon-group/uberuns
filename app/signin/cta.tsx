@@ -22,7 +22,7 @@ const CallToActionGrid = () => {
             <h2 className="text-xl font-semibold mb-4">New Member Signup</h2>
             <p className="mb-4">Sign up here if you are a new member of the Nordkurve and this website.</p>
           </div>
-          <Link legacyBehavior href="https://example.com/new-member-signup">
+          <Link legacyBehavior href="/signin/new">
             <a className="self-start mt-4 px-4 py-2 bg-red-800 text-white font-semibold rounded-lg shadow-md hover:bg-green-700">
               Signup
             </a>
@@ -33,7 +33,7 @@ const CallToActionGrid = () => {
             <h2 className="text-xl font-semibold mb-4">Login</h2>
             <p className="mb-4">If you've already got an account on nk12.de, log in here</p>
           </div>
-          <Link legacyBehavior href="https://example.com/login">
+          <Link legacyBehavior href="/signin">
             <a className="self-start mt-4 px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700">
               Login
             </a>

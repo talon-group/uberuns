@@ -54,10 +54,7 @@ export default function Navlinks({ user }: NavlinksProps) {
         ) : (
           <>
             <Link href="/signin" className={s.link}>
-              Sign In (new member)
-            </Link>
-            <Link href="/signin" className={s.link}>
-              Sign In (existing member)
+              Sign In
             </Link>
           </>
         )}
