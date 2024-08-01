@@ -32,7 +32,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
 
       try {
         const { data, error } = await supabase
-          .from('users')
+          .from('users') 
           .select('*')
           .eq('id', user.id)
           .single();
@@ -126,7 +126,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
               readOnly
             />
           </div>
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             <label htmlFor="Memberid" className="text-sm font-medium text-gray-700">Member id:</label>
             <input
               id="Memberid"
@@ -135,7 +135,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
               readOnly
             />
-          </div>
+          </div> */}
           <div className="flex flex-col">
             <label htmlFor="fanclub" className="text-sm font-medium text-gray-700">Fanclub</label>
             <input

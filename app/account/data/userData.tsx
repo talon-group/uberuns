@@ -12,6 +12,7 @@ export default function AccountForm({ user }: { user: User | null }) {
   const [fullname, setFullname] = useState<string | null>(null);
   const [memberId, setMemberId] = useState<string>('');
   const [userDatas, setUserDatas] = useState<any>(null);
+  const [userMemberId, setUserMemberId] = useState<any>('');
   const [userEmail, setUserEmail] = useState<string | undefined>(undefined);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export default function AccountForm({ user }: { user: User | null }) {
       console.log("Fetching profile data for user ID:", user?.id);
       console.log("Fetching profile data for user email:", userEmail);
 
-      if (!userEmail) {
+      if (!userEmail) { 
         console.warn("User email is undefined, cannot fetch userdatas");
         return;
       }
@@ -293,7 +294,7 @@ export default function AccountForm({ user }: { user: User | null }) {
               id="memberid"
               name="memberid"
               type="text"
-              value="24"
+              value={userDatas?.id}
               readOnly
               onChange={(e) => setMemberId(e.target.value)}
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500 bg-gray-100"
