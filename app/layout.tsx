@@ -6,12 +6,12 @@ import { PropsWithChildren, Suspense } from 'react';
 import { getURL } from '@/utils/helpers';
 import 'styles/main.css';
 
-const title = 'Nordkurve 12 e.V.';
+const title = 'Nordkurve12 e.V.';
 const description = 'Membership services for the ultras of Bayer null vier';
 
 export const metadata: Metadata = {
   metadataBase: new URL(getURL()),
-  title: "Nordkurve 12 e.V.",
+  title: "Nordkurve12 e.V.",
   description: "Membership services for the ultras of Bayer null vier",
   openGraph: {
     title: title,

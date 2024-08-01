@@ -1,4 +1,4 @@
-'use client';
+"use client"
 
 import { useEffect, useState } from 'react';
 import { createClient } from '@/utils/supabase/client';
@@ -7,7 +7,7 @@ import AccountForm from './data/userData';
 import UserDataDisplay from './data/dataDisplay';
 import { useRouter } from 'next/navigation';
 
-export default function UserStatusChecker({ user, userEmail }: { user: User | null, userEmail: any }) {
+export default function UserStatusChecker({ user, userEmail }: { user: User | null, userEmail: string | null }) {
   const supabase = createClient();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
@@ -36,26 +36,38 @@ export default function UserStatusChecker({ user, userEmail }: { user: User | nu
           setIsOldUser(!!data);
         }
 
-        // Check onboarding and terms status in users table
-        const { data: userData, error: userError } = await supabase
-          .from('users')
-          .select('onboarding, terms')
-          .eq('id', user?.id)
-          .single();
+        if (user?.id) {
+          // Check onboarding and terms status in users table
+          const { data: userData, error: userError } = await supabase
+            .from('users')
+            .select('onboarding, terms')
+            .eq('id', user.id)
+            .single();
 
-        if (userError) {
-          console.error('Error fetching user data:', userError);
-          return;
-        }
+          if (userError) {
+            console.error('Error fetching user data:', userError);
+            setErrorMessage('Error fetching user data');
+            return;
+          }
 
-        if (userData.onboarding === null || userData.onboarding === false) {
-          router.push('/account/onboarding');
-        } else if (userData.onboarding === true && (userData.terms === null || userData.terms === false)) {
-          router.push('/account/onboarding/terms');
+          console.log('User data:', userData); // Add this line to see the fetched user data
+
+          if (userData) {
+            if (userData.terms === null || userData.terms === false) {
+              router.push('/account/onboarding');
+            } else {
+              router.push('/account');
+            }
+          } else {
+            console.warn('User data is undefined');
+          }
+        } else {
+          console.warn('User ID is undefined');
         }
 
       } catch (error: any) {
         console.error('Error checking user status:', error.message);
+        setErrorMessage('Error checking user status');
         setIsOldUser(false); // Treat as new user if there's an error
       } finally {
         setLoading(false);
@@ -80,13 +92,15 @@ export default function UserStatusChecker({ user, userEmail }: { user: User | nu
   );
 };
 
+
 export async function UserStatusCheckerAsPage() {
   const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  // Ensure userEmail is either string or null
+  const userEmail: string | null = user?.email ?? null;
 
   return (
-    <UserStatusChecker user={user} userEmail={user?.email} />
+    <UserStatusChecker user={user} userEmail={userEmail} />
   );
 }

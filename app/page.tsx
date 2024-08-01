@@ -44,7 +44,7 @@ export default async function PricingPage() {
     }
 
     // Ensure userData is correctly typed
-    if (userData && (userData.onboarding !== true || userData.terms !== true)) {
+    if (userData && (userData.terms !== true)) {
       // Redirect to /account if onboarding or terms are not true
       redirect('/account');
       return;
@@ -58,13 +58,13 @@ export default async function PricingPage() {
         products={products ?? []}
         subscription={subscription}
       /> */}
-      {/* <HeroSection {
-        header: 'Welcome to the Club',
-        subtitle: 'Join the club and get access to exclusive content and events',
-        imageSrc: '/images/hero.jpg',
-        buttonText: 'Sign Up',
-        buttonLink: '/signup
-      } /> */}
+      <HeroSection
+        header="Nordkurve12 e.V."
+        subtitle="B04"
+        imageSrc="https://idontwanttofadebut.vercel.app/NK.png"  // Make sure to use a valid path to your image
+        buttonText="Your Account"
+        buttonLink="/account"  // Replace with the actual link you want the button to navigate to
+      />
       {!user && <CallToActionGrid />}
       <ShortNewsletterPosts />
       {/* <HomeContent /> */}

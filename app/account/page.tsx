@@ -21,6 +21,9 @@ export default async function Account() {
     return redirect('/signin');
   }
 
+  // Convert `user.email` to `string | null`
+  const userEmail: string | null = user.email ?? null;
+
   return (
     <section className="mb-32 bg-white">
       <div className="max-w-6xl px-4 py-8 mx-auto sm:px-6 sm:pt-24 lg:px-8">
@@ -44,7 +47,7 @@ export default async function Account() {
         )} */}
         <SignUpForCoach subscription={subscription} />
       </div>
-      <UserStatusChecker user={user} userEmail={user.email} />
+      <UserStatusChecker user={user} userEmail={userEmail} />
     </section>
   );
 }

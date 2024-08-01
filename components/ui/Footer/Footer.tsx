@@ -15,7 +15,7 @@ export default function Footer() {
             <span className="mr-2 border rounded-full border-zinc-700">
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx8pafgqap2SM8xEJ7AHE8xRdRfJr4ssfhfQ&s" width="64px" height="64px" />
             </span>
-            <span>Nordkurve 12 e.V.</span>
+            <span>Nordkurve12 e.V.</span>
           </Link>
         </div>
         <div className="col-span-1 lg:col-span-2">

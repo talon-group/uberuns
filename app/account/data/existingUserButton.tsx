@@ -129,13 +129,17 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
     try {
       setLoading(true);
 
-      const { error } = await supabase
+      console.log('Updating onboarding status for user ID:', user.id);
+
+      const { error: updateError } = await supabase
         .from('users')
         .update({ onboarding: true })
         .eq('id', user.id);
 
-      if (error) {
-        throw error;
+      if (updateError) {
+        console.error('Error updating onboarding status:', updateError.message);
+        alert('Error updating onboarding status.');
+        throw updateError;
       }
 
       router.push('/account/onboarding/terms');
@@ -170,7 +174,7 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
         </Button> */}
       </div>
     );
-  };
+  }
 
   if (userData) {
     return (
@@ -209,16 +213,5 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
         )}
       </div>
     </Card>
-  );
-}
-
-export async function ExistingUserButtonAsPage() {
-  const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  return (
-    <ExistingUserButton user={user} />
   );
 }

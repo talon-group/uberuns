@@ -63,12 +63,12 @@ export default function PaymentsForm({ user }: PaymentsFormProps) {
           user: user.id,
           iban,
           subscribed,
-        });
+        }, { onConflict: 'user' }); // Correct usage of 'onConflict'
 
       if (error) throw error;
 
-    //   alert('IBAN updated successfully!');
-      fetchPaymentStatus(); // Refresh subscription status
+      // Refresh subscription status
+      fetchPaymentStatus();
     } catch (error: any) {
       console.error('Error updating IBAN:', error.message);
       setError('Error updating IBAN.');
@@ -81,15 +81,6 @@ export default function PaymentsForm({ user }: PaymentsFormProps) {
     <Card
       title="Payment Information"
       description="Update your IBAN and check your subscription status"
-    //   footer={
-    //     <Button
-    //       variant="slim"
-    //       onClick={() => fetchPaymentStatus()}
-    //       loading={loading}
-    //     >
-    //       Refresh Status
-    //     </Button>
-    //   }
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex flex-col">
@@ -105,7 +96,7 @@ export default function PaymentsForm({ user }: PaymentsFormProps) {
             required
           />
         </div>
-        {/* {error && <p className="text-red-500">{error}</p>} */}
+        {error && <p className="text-red-500">{error}</p>}
         <div className="flex justify-between items-center">
           <Button
             type="submit"
