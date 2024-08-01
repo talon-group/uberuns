@@ -15,7 +15,7 @@ import { getAuthTypes, getRedirectMethod } from '@/utils/auth-helpers/settings';
 interface SignUpProps {
   allowEmail: boolean;
   redirectMethod: string;
-}
+};
 
 export default function SignUpPage({ allowEmail, redirectMethod }: SignUpProps) {
   const router = redirectMethod === 'client' ? useRouter() : null;

@@ -63,7 +63,7 @@ const ShortNewsletterPosts = () => {
             <div>
               <h2 className="text-2xl font-bold mb-4">{post.title}</h2>
               <div dangerouslySetInnerHTML={{ __html: getExcerpt(post.html) }} />
-              <Link legacyBehavior href={`/newsletter/`}>
+              <Link legacyBehavior href={`https://nordkurve2-newsletter.ghost.io/${post.slug}`}>
                 <a className="text-blue-500 hover:underline mt-4 block">Read more</a>
               </Link>
             </div>
