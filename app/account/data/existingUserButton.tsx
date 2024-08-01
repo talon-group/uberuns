@@ -135,7 +135,17 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
   // If no user data is found and there's an error, return null
   if (userDatas === null && errorMessage) {
     return (
-      <UserDataDisplay user={user} /> 
+      <div>
+        <UserDataDisplay user={user} /> 
+        <Button
+          variant="slim"
+          onClick={handleNextStep}
+          disabled={loading}
+          className='bg-red-800'
+        >
+          {loading ? 'Loading ...' : 'Next Step'}
+        </Button>
+      </div>
     );
   };
 

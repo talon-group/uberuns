@@ -37,9 +37,9 @@ export default async function Account() {
         {subscription && (
           <CustomerPortalForm subscription={subscription} />
         )}
-        {!subscription && (
+        {/* {!subscription && (
           <YearlyBillingProducts products={products ?? []} subscription={subscription} />
-        )}
+        )} */}
         <SignUpForCoach subscription={subscription} />
       </div>
       <UserStatusChecker user={user} userEmail={user.email} />

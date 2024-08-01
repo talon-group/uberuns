@@ -6,12 +6,12 @@ import Button from '@/components/ui/Button';
 import { useRouter } from 'next/navigation';
 
 const topics = [
-  "tour",
-  "account help",
-  "general enquiry",
-  "payment help",
-  "spieltag enquiry",
-  "other"
+  // "tour",
+  // "account help",
+  // "general enquiry",
+  "Tour",
+  "spieltag Mitgliedschaft",
+  "Generelle Frage"
 ];
 
 export default function ContactForm() {
