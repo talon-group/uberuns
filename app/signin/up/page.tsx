@@ -1,25 +1,29 @@
-// signup.tsx
 'use client';
 
 import Button from '@/components/ui/Button';
-import React from 'react';
-import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { signUp } from '@/utils/auth-helpers/server';
 import { handleRequest } from '@/utils/auth-helpers/client';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import Card from '@/components/ui/Card';
 import { getAuthTypes, getRedirectMethod } from '@/utils/auth-helpers/settings';
 
-// Define prop type with allowEmail boolean
-interface SignUpProps {
-  allowEmail: boolean;
-  redirectMethod: string;
-}
-
-export default function SignUpPage({ allowEmail, redirectMethod }: SignUpProps) {
-  const router = redirectMethod === 'client' ? useRouter() : null;
+const SignUpPage: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [allowEmail, setAllowEmail] = useState(false);
+  const [redirectMethod, setRedirectMethod] = useState<string>('');
+  const router = redirectMethod === 'client' ? useRouter() : null;
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      const { allowEmail } = await getAuthTypes();
+      const redirectMethod = await getRedirectMethod();
+      setAllowEmail(allowEmail);
+      setRedirectMethod(redirectMethod);
+    };
+
+    fetchSettings();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true); // Disable the button while the request is being handled
@@ -31,7 +35,12 @@ export default function SignUpPage({ allowEmail, redirectMethod }: SignUpProps) 
     <div className="flex justify-center height-screen-helper">
       <div className="flex flex-col justify-between max-w-lg p-3 m-auto w-80 ">
         <div className="flex justify-center pb-12 ">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx8pafgqap2SM8xEJ7AHE8xRdRfJr4ssfhfQ&s" width="64px" height="64px" />
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx8pafgqap2SM8xEJ7AHE8xRdRfJr4ssfhfQ&s"
+            width="64px"
+            height="64px"
+            alt="Logo"
+          />
         </div>
         <Card title="Sign Up">
           <div className="my-8">
@@ -79,16 +88,6 @@ export default function SignUpPage({ allowEmail, redirectMethod }: SignUpProps) 
       </div>
     </div>
   );
-}
+};
 
-// export async function getServerSideProps() {
-//   const { allowOauth, allowEmail, allowPassword } = getAuthTypes();
-//   const redirectMethod = getRedirectMethod();
-
-//   return {
-//     props: {
-//       allowEmail,
-//       redirectMethod,
-//     },
-//   };
-// }
+export default SignUpPage;
