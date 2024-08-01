@@ -14,6 +14,14 @@ interface NavlinksProps {
 
 export default function Navlinks({ user }: NavlinksProps) {
   const router = getRedirectMethod() === 'client' ? useRouter() : null;
+  const pathname = usePathname();
+
+  const handleSignOut = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent default form submission
+    if (router) {
+      await handleRequest(e, SignOut, router, 'POST'); // Assuming 'POST' is the method
+    }
+  };
 
   return (
     <div className="relative flex flex-row justify-between py-4 align-center md:py-6">
@@ -49,8 +57,8 @@ export default function Navlinks({ user }: NavlinksProps) {
             <Link href="/account" className={s.link}>
               Account
             </Link>
-            <form onSubmit={(e) => handleRequest(e, SignOut, router)}>
-              <input type="hidden" name="pathName" value={usePathname()} />
+            <form onSubmit={handleSignOut}>
+              <input type="hidden" name="pathName" value={pathname ?? ''} />
               <button type="submit" className={s.link}>
                 Sign out
               </button>
