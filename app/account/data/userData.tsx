@@ -264,7 +264,7 @@ export default function AccountForm({ user }: { user: User | null }) {
 
   return (
     <Card
-      title="Your Profile"
+      title="Dein Profil"
       footer={
         <Button
           variant="slim"

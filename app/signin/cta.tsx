@@ -12,7 +12,7 @@ const CallToActionGrid = () => {
             <p className="mb-4">Sign up here if you are a member of the Nordkurve but don't have a digital account. Use your Nordkurve email address and create a new password</p>
           </div>
           <Link legacyBehavior href="/signin/up">
-            <a className="self-start mt-4 px-4 py-2 bg-red-800 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700">
+            <a className="self-start mt-4 px-4 py-2 bg-red-800 text-white font-semibold rounded-lg shadow-md hover:bg-red-700">
               Signup
             </a>
           </Link>

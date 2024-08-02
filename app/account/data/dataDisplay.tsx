@@ -131,7 +131,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
   }
 
   return (
-    <Card title="Your Profile">
+    <Card title="Dein Profil">
       <div className="form-widget space-y-6">
         {successMessage && <p className="text-green-600">{successMessage}</p>}
         {error && <p className="text-red-600">{error}</p>}
@@ -139,6 +139,16 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
             {/* Welcome to your Nordkurve account! Please fill in your information */}
           </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="flex flex-col">
+            <label htmlFor="email" className="text-sm font-medium text-gray-700">Mitgliedsnummer</label>
+            <input
+              id="MemberId"
+              type="MemberId"
+              value="3795"
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
+              readOnly
+            />
+          </div>
           <div className="flex flex-col">
             <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>
             <input
@@ -229,9 +239,9 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md shadow-sm hover:bg-blue-700 disabled:opacity-50"
+            className="mt-4 px-4 py-2 bg-red-800 text-white rounded-md shadow-sm hover:bg-red-700 disabled:opacity-50"
           >
-            {isSubmitting ? 'Updating...' : 'Update Profile'}
+            {isSubmitting ? 'Updating...' : 'Profil aktualisieren'}
           </button>
         </form>
       </div>

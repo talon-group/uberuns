@@ -88,7 +88,7 @@ export default function ContactForm() {
           variant="slim"
           type="submit"
           disabled={loading}
-          className="bg-blue-500 text-white"
+          className="bg-red-800 text-white"
         >
           {loading ? 'Sending...' : 'Send Message'}
         </Button>

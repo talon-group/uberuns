@@ -50,6 +50,63 @@ export default function TermsPage() {
         <h1 className="text-2xl font-bold mb-4">Terms and Conditions</h1>
         <p className="mb-6">Please read and approve the terms and conditions below:</p>
         <div className="overflow-y-auto h-96 p-4 bg-gray-50 border border-gray-200 rounded-md">
+          <p className='mb-4 text-red-800'>
+          Satzung
+ 
+ <p className='mb-4 text-red-800'>Satzung des Vereins NORDKURVE12 e.V.:</p>
+  
+ <p className='mb-4 text-red-800'>§ 1 (Name und Sitz des Vereins)</p>
+  
+ <p className='mb-4 text-red-800'>Der Verein führt den Namen NORDKURVE12 e.V..</p>
+  
+ <p className='mb-4 text-red-800'>Er soll in das Vereinsregister eingetragen werden und trägt dann den Zusatz „e.V.”</p>
+  
+ <p className='mb-4 text-red-800'>Der Sitz des Vereines ist Leverkusen.</p>
+  
+ <p className='mb-4 text-red-800'>§ 2 (Geschäftsjahr)</p>
+  
+ <p className='mb-4 text-red-800'>Das Geschäftsjahr geht vom 01.07. bis 30.06.</p>
+  
+ <p className='mb-4 text-red-800'>§ 3 (Zweck des Vereins)</p>
+  
+ <p className='mb-4 text-red-800'>Zweck des Vereins ist die Förderung einer unabhängigen und lebendigen Fankultur in Leverkusen. Der Fanszene rund um den Sportverein Bayer 04 Leverkusen soll eine gruppenübergreifende Organisationsstruktur geboten werden. Durch gemeinschaftliche Aktionen und Aktivitäten (z.B. Auswärtsfahrten, Konzerte, Fußballturniere, Anstreben von eigenen Clubräumen als Anlaufstelle) soll aus den verschiedenen Elementen der Fanszene eine Anlaufstelle entstehen, die mit der „Nordkurve” gleichzeitig über ein Sprachrohr für die Vertretung Ihrer Interessen verfügt. Der Verein ist selbstlos tätig und verfolgt nicht in erster Linie eigenwirtschaftliche Ziele. Mittel des Vereins dürfen nur für satzungsgemäße Zwecke verwendet werden. Die Mitglieder erhalten keine Zuwendungen aus den Mitteln des Vereins. Es darf keine Person durch Ausgaben, die dem Zweck des Vereins fremd sind oder durch unverhältnismäßig hohe Vergütungen begünstigt werden.</p>
+  
+ <p className='mb-4 text-red-800'>§ 4 (Rechte der Mitglieder)</p>
+  
+ <p className='mb-4 text-red-800'>Die Rechte der Mitglieder bestimmen sich nach dieser Satzung. Alle Mitglieder haben im Rahmen der Satzung das Recht am Vereinsleben teilzunehmen. Sie sind berechtigt an Aktionen, Aktivitäten und Veranstaltungen teilzunehmen.</p>
+  
+ <p className='mb-4 text-red-800'>§ 5 (Erwerb der Mitgliedschaft)</p>
+  
+ <p className='mb-4 text-red-800'>Vereinsmitglieder können natürliche Personen oder juristische Personen werden. Jugendliche unter 14 Jahren können mit Zustimmung eines gesetzlichen Vertreters Mitglied werden.</p>
+  
+ <p className='mb-4 text-red-800'>Der Aufnahmeantrag ist schriftlich zu stellen. Gegen die Ablehnung, die keiner Begründung bedarf, steht dem/der Bewerber/in die Berufung an die Mitgliederversammlung zu, welche dann endgültig entscheidet.</p>
+  
+ <p className='mb-4 text-red-800'>Mit der Antragstellung erkennt das Mitglied die Satzung der NORDKURVE 12 e.V. an.</p>
+  
+ <p className='mb-4 text-red-800'>§ 6 (Beendigung der Mitgliedschaft)</p>
+  
+ <p className='mb-4 text-red-800'>Die Mitgliedschaft endet durch Ausschluss, Tod oder Auflösung der juristischen Person.</p>
+  
+ <p className='mb-4 text-red-800'>Der Austritt erfolgt durch schriftliche Erklärung gegenüber einem vertretungsberechtigten Vorstandsmitglied. Die schriftliche Austrittserklärung muss mit einer Frist von einem Monat jeweils zum Ende des Geschäftsjahres gegenüber dem Vorstand erklärt werden.</p>
+  
+ <p className='mb-4 text-red-800'>Ein Ausschluss kann nur aus wichtigem Grund erfolgen. Wichtige Gründe sind insbesondere ein die Vereinsziele schädigendes Verhalten, die Verletzung satzungsgemäßer Pflichten oder Beitragsrückstände von mindestens zwei Monaten.</p>
+  
+ <p className='mb-4 text-red-800'>Über den Ausschluss entscheidet der Vorstand. Gegen den Ausschluss steht dem Mitglied die Berufung an die Mitgliederversammlung zu, die schriftlich binnen eines Monats an den Vorstand zu richten ist. Die Mitgliederversammlung entscheidet endgültig.</p>
+  
+ <p className='mb-4 text-red-800'>§ 7 (Beiträge)</p>
+  
+ <p className='mb-4 text-red-800'>Von den Mitgliedern werden Beiträge erhoben. Die Höhe der Beiträge und deren Fälligkeit bestimmt die Mitgliederversammlung durch Beschluss. Mitglieder, die Ihre Beiträge nicht entrichtet haben, sind für die Dauer des Verzugs von der Ausübung sämtlicher Mitgliedschaftsrechte ausgeschlossen.</p>
+  
+ <p className='mb-4 text-red-800'>§ 8 (Organe des Vereins)</p>
+  
+ <p className='mb-4 text-red-800'>Organe des Vereins sind die Mitgliederversammlung und der Vorstand. Vereinsämter sind Ehrenämter. Mitglieder des Vorstandes und Kassenprüfer erhalten eine Aufwandsentschädigung für allgemein entstehende Kosten (Telefongebühren etc.).</p>
+  
+ <p className='mb-4 text-red-800'>§ 9 (Mitgliederversammlung)</p>
+  
+ <p className='mb-4 text-red-800'>Die Mitgliederversammlung ist das oberste Vereinsorgan.</p>
+  
+ <p className='mb-4 text-red-800'>Zu ihren Aufgaben gehören insbesondere die Wahl und Abwahl des Vorstandes, Entlastung des Vorstandes, Entgegennahme der Berichte des Vorstandes, Wahl der Kassenprüfer/innen, Festsetzung von Beiträgen und deren Fälligkeit, Beschlussfassung über die Änderung der Satzung, Beschlussfassung über die Auflösung des Vereins, Entscheidung über Aufnahme und Ausschluss von Mitgliedern in Berufungsfällen sowie weitere Aufgaben, soweit diese sich aus der Satzung oder nach dem Gesetz ergeben.</p>
+          </p>
           <p className="mb-4">
             Im ersten Halbjahr jeden Geschäftsjahres findet eine ordentliche Mitgliederversammlung statt. Über die Mitgliederversammlung ist ein Protokoll zu führen.
           </p>

@@ -67,7 +67,7 @@ export default function PaymentsForm({ user }: PaymentsFormProps) {
 
       if (error) throw error;
 
-      // Refresh subscription status
+      // Refresh Abonnementstatus
       fetchPaymentStatus();
     } catch (error: any) {
       console.error('Error updating IBAN:', error.message);
@@ -79,8 +79,8 @@ export default function PaymentsForm({ user }: PaymentsFormProps) {
 
   return (
     <Card
-      title="Payment Information"
-      description="Update your IBAN and check your subscription status"
+      title="Zahlungsinformationen"
+      description="Aktualisieren Sie Ihre IBAN und überprüfen Sie Ihren Abonnementstatus"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex flex-col">
@@ -103,10 +103,10 @@ export default function PaymentsForm({ user }: PaymentsFormProps) {
             variant="slim"
             loading={loading}
           >
-            {loading ? 'Saving...' : 'Save'}
+            {loading ? 'Saving...' : 'speichern'}
           </Button>
           <p className={`text-lg font-semibold ${subscribed ? 'text-green-600' : 'text-red-600'}`}>
-            Subscription Status: {subscribed === null ? 'Not Subscribed' : subscribed ? 'Subscribed' : 'Not Subscribed'}
+            Abonnementstatus: {subscribed === null ? 'Nicht abonniert' : subscribed ? 'Subscribed' : 'Nicht abonniert'}
           </p>
         </div>
       </form>

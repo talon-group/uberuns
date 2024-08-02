@@ -1,12 +1,14 @@
 'use client';
 
-import { useState } from 'react';
-import Button from '@/components/ui/Button';
+import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { createStripePortal } from '@/utils/stripe/server';
+import Button from '@/components/ui/Button';
 import Link from 'next/link';
 import Card from '@/components/ui/Card';
 import ContactForm from '@/app/account/contactForm';
+import { createClient } from '@/utils/supabase/client';
+import { User } from '@supabase/supabase-js';
 import { Tables } from '@/types_db';
 
 type Subscription = Tables<'subscriptions'>;
@@ -30,14 +32,40 @@ export default function SignUpForCoach({ subscription }: Props) {
   const currentPath = usePathname();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [subscribed, setSubscribed] = useState<boolean | null>(null);
+  const supabase = createClient();
 
-  const subscriptionPrice =
-    subscription &&
-    new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: subscription?.prices?.currency!,
-      minimumFractionDigits: 0
-    }).format((subscription?.prices?.unit_amount || 0) / 100);
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+      if (user) {
+        fetchPaymentStatus(user.id);
+      }
+    };
+    fetchUser();
+  }, []);
+
+  const fetchPaymentStatus = async (userId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from('payments')
+        .select('subscribed')
+        .eq('user', userId)
+        .single();
+
+      if (error && error.code !== 'PGRST100') throw error; // Ignore not found error
+
+      if (data) {
+        setSubscribed(data.subscribed ?? null);
+      } else {
+        setSubscribed(null);
+      }
+    } catch (error: any) {
+      console.error('Error fetching payment status:', error.message);
+    }
+  };
 
   const handleStripePortalRequest = async () => {
     setIsSubmitting(true);
@@ -57,18 +85,23 @@ export default function SignUpForCoach({ subscription }: Props) {
   return (
     <>
       <Card
-        title="Sign up for a coach"
-        description="Currently no coaches available yet"
+        title="Melden Sie sich für einen Coach an"
+        description="Derzeit sind noch keine Trainer verfügbar"
         footer={
           <div className="flex flex-col items-start justify-between text-white sm:flex-row sm:items-center">
             <p className="pb-4 sm:pb-0"></p>
+            {!subscribed && (
+              <p className="text-red-500">
+                Sie können sich erst dann für eine Veranstaltung anmelden, wenn Ihr Abonnement bestätigt wurde.
+              </p>
+            )}
             <Button
               variant="slim"
               onClick={handleStripePortalRequest}
               loading={isSubmitting}
-              disabled
+              disabled={!subscribed}
             >
-              Register
+              registrieren
             </Button>
           </div>
         }
@@ -76,8 +109,8 @@ export default function SignUpForCoach({ subscription }: Props) {
         <></>
       </Card>
       <Card
-        title="Contact us"
-        description="If you need help with your account, get in touch"
+        title="Kontaktiere uns"
+        description="Wenn Sie Hilfe mit Ihrem Konto benötigen, nehmen Sie Kontakt mit uns auf"
         footer={
           <div className="flex flex-col items-start justify-between text-white sm:flex-row sm:items-center">
             <p className="pb-4 sm:pb-0"></p>
@@ -86,7 +119,7 @@ export default function SignUpForCoach({ subscription }: Props) {
               onClick={handleOpenContactForm}
               loading={isSubmitting}
             >
-              Contact form
+              Kontakt Formular
             </Button>
           </div>
         }

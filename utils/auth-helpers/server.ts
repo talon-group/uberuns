@@ -72,7 +72,7 @@ export async function signInWithEmail(formData: FormData) {
     redirectPath = getStatusRedirect(
       '/signin/email_signin',
       'Success!',
-      'Please check your email for a magic link. You may now close this tab.',
+      'Please check Deine E-Mail for a magic link. You may now close this tab.',
       true
     );
   } else {
@@ -117,7 +117,7 @@ export async function requestPasswordUpdate(formData: FormData) {
     redirectPath = getStatusRedirect(
       '/signin/forgot_password',
       'Success!',
-      'Please check your email for a password reset link. You may now close this tab.',
+      'Please check Deine E-Mail for a password reset link. You may now close this tab.',
       true
     );
   } else {
@@ -209,7 +209,7 @@ export async function signUp(formData: FormData) {
     redirectPath = getStatusRedirect(
       '/',
       'Success!',
-      'Please check your email for a confirmation link. You may now close this tab.'
+      'Please check Deine E-Mail for a confirmation link. You may now close this tab.'
     );
   } else {
     redirectPath = getErrorRedirect(
@@ -272,7 +272,7 @@ export async function updateEmail(formData: FormData) {
   if (!isValidEmail(newEmail)) {
     return getErrorRedirect(
       '/account',
-      'Your email could not be updated.',
+      'Deine E-Mail could not be updated.',
       'Invalid email address.'
     );
   }
@@ -280,7 +280,7 @@ export async function updateEmail(formData: FormData) {
   const supabase = createClient();
 
   const callbackUrl = getURL(
-    getStatusRedirect('/account', 'Success!', `Your email has been updated.`)
+    getStatusRedirect('/account', 'Success!', `Deine E-Mail has been updated.`)
   );
 
   const { error } = await supabase.auth.updateUser(
@@ -293,7 +293,7 @@ export async function updateEmail(formData: FormData) {
   if (error) {
     return getErrorRedirect(
       '/account',
-      'Your email could not be updated.',
+      'Deine E-Mail could not be updated.',
       error.message
     );
   } else {

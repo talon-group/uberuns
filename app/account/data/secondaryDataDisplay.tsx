@@ -135,7 +135,7 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
   }
 
   return (
-    <Card title="Your Profile">
+    <Card title="Dein Profil">
       <div className="form-widget space-y-6">
         {successMessage && <p className="text-green-600">{successMessage}</p>}
         {error && <p className="text-red-600">{error}</p>}
@@ -233,9 +233,9 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md shadow-sm hover:bg-blue-700 disabled:opacity-50"
+            className="mt-4 px-4 py-2 bg-red-800 text-white rounded-md shadow-sm hover:bg-red-300 disabled:opacity-50"
           >
-            {isSubmitting ? 'Updating...' : 'Update Profile'}
+            {isSubmitting ? 'Updating...' : 'Profil aktualisieren'}
           </button>
         </form>
         {updateSuccessful && (

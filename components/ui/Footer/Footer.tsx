@@ -94,7 +94,7 @@ export default function Footer() {
       <div className="flex flex-col items-center justify-between py-12 space-y-4 md:flex-row bg-zinc-900">
         <div>
           <span className='text-white'>
-            &copy; {new Date().getFullYear()} Designed by Liam Arbuckle (Talonova Aerospace) in Australia. 🇦🇺 🤝 🇩🇪
+            &copy; {new Date().getFullYear()} Entworfen von Liam Arbuckle (Talonova Aerospace) in Australien. 🇦🇺 🤝 🇩🇪
           </span>
         </div>
         {/* <div className="flex items-center">

@@ -76,8 +76,8 @@ export default function SignUpForCoach({ subscription }: Props) {
         <></>
       </Card>
       <Card
-        title="Contact us"
-        description="If you need help with your account, get in touch"
+        title="Kontaktiere uns"
+        description="Wenn Sie Hilfe mit Ihrem Konto benötigen, nehmen Sie Kontakt mit uns auf"
         footer={
           <div className="flex flex-col items-start justify-between text-white sm:flex-row sm:items-center">
             <p className="pb-4 sm:pb-0"></p>
@@ -86,7 +86,7 @@ export default function SignUpForCoach({ subscription }: Props) {
               onClick={handleOpenContactForm}
               loading={isSubmitting}
             >
-              Contact form
+              Kontakt Formular
             </Button>
           </div>
         }
