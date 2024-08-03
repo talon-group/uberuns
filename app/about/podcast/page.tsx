@@ -2,6 +2,10 @@ import React from 'react';
 
 const PodcastAlleBeidePage: React.FC = () => {
   return (
+    <div
+    className="absolute inset-0 bg-cover bg-center opacity-20"
+    style={{ backgroundImage: "url('https://github.com/talon-group/uberuns/blob/3d6f3d6a3f731bb1308cf5fa1977480e0b3a1c71/public/bg.jpeg?raw=true')" }}
+  >
     <div className="container mx-auto px-4 py-8">
       <div className="bg-white shadow-md p-6 mb-8">
         <img
@@ -26,6 +30,7 @@ const PodcastAlleBeidePage: React.FC = () => {
           Die aktuellen Episoden findet ihr hier: <a href="https://open.spotify.com/show/0ctV8hyXegxFtscfydUhkr" className="text-blue-500 hover:underline">Spotify - Alle Beide Podcast</a>
         </p>
       </div>
+    </div>
     </div>
   );
 };

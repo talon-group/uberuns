@@ -54,7 +54,7 @@ export default function PasswordSignIn({
               className="w-full p-3 rounded-md bg-red-800"
               required
             />
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Passwort</label>
             <input
               id="password"
               placeholder="Password"

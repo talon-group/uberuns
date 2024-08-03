@@ -263,7 +263,7 @@ export default function SecondUserDataDisplayAccount({ user }: { user: User | nu
             disabled={loading}
             loading={loading}
           >
-            {loading ? 'Loading ...' : 'Update'}
+            {loading ? 'Loading ...' : 'Data aktualisieren'}
           </Button>
           <Button
             variant="slim"

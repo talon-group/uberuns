@@ -40,33 +40,29 @@ export default async function Account() {
   const userAge = userDetails?.geb_datum ? calculateAge(userDetails.geb_datum) : null;
 
   return (
+    <div
+        className="absolute inset-0 bg-cover bg-center opacity-20"
+        style={{ backgroundImage: "url('https://github.com/talon-group/uberuns/blob/3d6f3d6a3f731bb1308cf5fa1977480e0b3a1c71/public/bg.jpeg?raw=true')" }}
+      >
     <section className="mb-32 bg-white">
       <div className="max-w-6xl px-4 py-8 mx-auto sm:px-6 sm:pt-24 lg:px-8">
         <div className="sm:align-center sm:flex sm:flex-col">
           <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
-            Konto
+            Mitgliedsbereich
           </h1>
           <p className="max-w-2xl m-auto mt-5 text-xl text-gray-700 sm:text-center sm:text-2xl">
-            Verwalten Sie hier Ihr Konto und Ihre Benutzerdaten
+            Verwalte hier Deine Daten oder melde dich für Touren an.
           </p>
         </div>
       </div>
       <div className="p-4">
-        <EmailForm userEmail={user.email} />
-        {/* {subscription && (
-          <CustomerPortalForm subscription={subscription} />
-        )} */}
-        {/* {!subscription && (
-          <YearlyBillingProducts products={products ?? []} subscription={subscription} />
-        )} */}
-        {/* {userAge !== null && userAge >= 18 && (
-          <SignUpForCoach subscription={subscription} />
-        )} */}
+      <ContactFormTwo subscription={subscription} />
         <SignUpForCoach />
-        <ContactFormTwo subscription={subscription} />
+        <EmailForm userEmail={user.email} />
       </div>
       <UserStatusChecker user={user} userEmail={userEmail} />
       <PaymentsForm user={user} />
     </section>
+    </div>
   );
 };

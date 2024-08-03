@@ -9,9 +9,9 @@ const topics = [
   // "tour",
   // "account help",
   // "general enquiry",
-  "Tour",
-  "spieltag Mitgliedschaft",
-  "Generelle Frage"
+  "Allgemeines",
+  "Mitgliedschaft",
+  "Touren"
 ];
 
 export default function ContactForm() {
@@ -57,17 +57,17 @@ export default function ContactForm() {
 
   return (
     <div className="p-5 max-w-md mx-auto">
-      <h2 className="text-xl font-semibold mb-4">Send a Message</h2>
+      <h2 className="text-xl font-semibold mb-4">Sende uns eine Nachricht</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="topic" className="block text-sm font-medium mb-1">Topic</label>
+          <label htmlFor="topic" className="block text-sm font-medium mb-1">Thema</label>
           <select
             id="topic"
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded"
           >
-            <option value="">Select a topic</option>
+            <option value="">Wähle ein Theme</option>
             {topics.map((t) => (
               <option key={t} value={t}>{t}</option>
             ))}
@@ -90,7 +90,7 @@ export default function ContactForm() {
           disabled={loading}
           className="bg-red-800 text-white"
         >
-          {loading ? 'Sending...' : 'Send Message'}
+          {loading ? 'Sending...' : ''}
         </Button>
       </form>
     </div>

@@ -273,11 +273,11 @@ export default function AccountForm({ user }: { user: User | null }) {
           disabled={loading}
           loading={loading}
         >
-          {loading ? 'Loading ...' : 'Update'}
+          {loading ? 'Loading ...' : 'Daten aktualisieren'}
         </Button>
       }
     >
-      <div className="form-widget space-y-6">
+      <div className="form-widget space-y-6 py-3">
         {error && <div className="text-red-500">{error}</div>}
         {successMessage && <div className="text-green-500">{successMessage}</div>}
         <div className="space-y-4">

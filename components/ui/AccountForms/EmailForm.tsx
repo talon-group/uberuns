@@ -41,11 +41,11 @@ const EmailForm: React.FC<EmailFormProps> = ({ userEmail }) => {
   return (
     <Card
       title="Deine E-Mail"
-      description="Bitte geben Sie die E-Mail-Adresse ein, mit der Sie sich anmelden möchten."
+      description="Gib hier deine neue E-Mail Adresse an"
       footer={
         <div className="flex flex-col items-start justify-between sm:flex-row sm:items-center">
           <p className="pb-4 sm:pb-0 text-white">
-            Wir senden Ihnen eine E-Mail, um die Änderung zu bestätigen.
+            Gib hier deine neue E-Mail-Adresse an.
           </p>
           <Button
             variant="slim"

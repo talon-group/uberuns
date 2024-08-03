@@ -57,7 +57,7 @@ export default function SignUpForCoach({ subscription }: Props) {
   return (
     <>
       <Card
-        title="Sign up for a coach"
+        title="Anmelden for a coach"
         description="Currently no coaches available yet"
         footer={
           <div className="flex flex-col items-start justify-between text-white sm:flex-row sm:items-center">

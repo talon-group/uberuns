@@ -4,6 +4,10 @@ import React from 'react';
 
 const ImpressumPage = () => {
   return (
+    <div
+    className="absolute inset-0 bg-cover bg-center opacity-20"
+    style={{ backgroundImage: "url('https://github.com/talon-group/uberuns/blob/3d6f3d6a3f731bb1308cf5fa1977480e0b3a1c71/public/bg.jpeg?raw=true')" }}
+  >
     <div className="container mx-auto px-6 py-12">
       <h1 className="text-3xl font-bold mb-6">Impressum</h1>
 
@@ -72,6 +76,7 @@ const ImpressumPage = () => {
           ohne ausdrückliche Zustimmung von NK12 nicht gestattet.
         </p>
       </section>
+    </div>
     </div>
   );
 };

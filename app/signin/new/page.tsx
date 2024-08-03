@@ -28,7 +28,7 @@ const SignUpPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true); // Disable the button while the request is being handled
-    await handleRequest(e, signUp, router, '/account'); // Add '/account' as the redirection path after sign up
+    await handleRequest(e, signUp, router, '/account'); // Add '/account' as the redirection path after Anmelden
     setIsSubmitting(false);
   };
 
@@ -43,8 +43,9 @@ const SignUpPage: React.FC = () => {
             alt="Logo"
           />
         </div>
-        <Card title="Sign Up">
+        <Card title="Anmelden">
           <div className="my-8">
+          <p className='pb-6'>Um mitglied in der Nordkurve12 zu werden, gib bitte deine E-Mail adresse ein und erstelle dir ein individuelles Passwort, welches du kunftig fur den Mitgliederbereich benotigst</p>
             <form
               noValidate
               className="mb-4"
@@ -79,7 +80,7 @@ const SignUpPage: React.FC = () => {
                   className="mt-1"
                   loading={isSubmitting}
                 >
-                  Sign up
+                  Anmelden
                 </Button>
               </div>
             </form>

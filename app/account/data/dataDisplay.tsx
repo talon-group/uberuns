@@ -123,7 +123,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
         throw error;
       }
 
-      setSuccessMessage('User data updated successfully!');
+      setSuccessMessage('Deine Daten wurden aktualisiert!');
     } catch (error: any) {
       setError('Error updating user data!');
       console.error('Error updating user data:', error.message);

@@ -90,8 +90,8 @@ export default function TermsPage() {
   return (
     <div className="p-5 bg-gray-100 min-h-screen flex flex-col items-center">
       <div className="bg-white p-8 rounded-lg shadow-md max-w-3xl w-full">
-        <h1 className="text-2xl font-bold mb-4">Terms and Conditions</h1>
-        <p className="mb-6">Please read and approve the terms and conditions below:</p>
+        <h1 className="text-2xl font-bold mb-4">Satzung und Datenschutz</h1>
+        <p className="mb-6">Bitte lese und akzeptiere unsere Satzung und die Hinweise zur Datenverabeitung:</p>
         <div className="overflow-y-auto h-96 p-4 bg-gray-50 border border-gray-200 rounded-md">
           <p className='mb-4 text-red-800'>
           Satzung
@@ -384,7 +384,7 @@ export default function TermsPage() {
           disabled={loading}
           className="mt-6 w-full"
         >
-          {loading ? 'Loading ...' : 'Accept and Proceed'}
+          {loading ? 'Loading ...' : 'Akzeptieren und fortfahren'}
         </Button>
       </div>
     </div>

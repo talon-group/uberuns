@@ -54,7 +54,7 @@ export default function Navlinks({ user }: NavlinksProps) {
               ÜBER UNS
             </Link>
             <Link href="https://nordkurve2-newsletter.ghost.io/" className="text-gray-700 hover:text-gray-900">
-              NEWS
+              NEUIGKEITEN
             </Link>
             <Link href="/about/reines" className="text-gray-700 hover:text-gray-900">
               REINES GEWISSEN

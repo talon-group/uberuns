@@ -2,6 +2,10 @@ import React from 'react';
 
 const StadioneckPage: React.FC = () => {
   return (
+    <div
+    className="absolute inset-0 bg-cover bg-center opacity-20"
+    style={{ backgroundImage: "url('https://github.com/talon-group/uberuns/blob/3d6f3d6a3f731bb1308cf5fa1977480e0b3a1c71/public/bg.jpeg?raw=true')" }}
+  >
     <div className="container mx-auto px-4 py-8">
       <div className="bg-white shadow-md p-6 mb-8">
         <img
@@ -33,6 +37,7 @@ const StadioneckPage: React.FC = () => {
           Öffnungszeiten zu jedem Heimspiel flexibel – Infos auf <a href="http://www.nk12.de" className="text-blue-500 underline">www.nk12.de</a> und auf Social Media.
         </p>
       </div>
+    </div>
     </div>
   );
 };

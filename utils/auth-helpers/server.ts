@@ -129,7 +129,7 @@ export async function requestPasswordUpdate(formData: FormData) {
   }
 
   return redirectPath;
-}
+};
 
 export async function signInWithPassword(formData: FormData) {
   const cookieStore = cookies();
@@ -151,7 +151,7 @@ export async function signInWithPassword(formData: FormData) {
     );
   } else if (data.user) {
     cookieStore.set('preferredSignInView', 'password_signin', { path: '/' });
-    redirectPath = getStatusRedirect('/', 'Success!', 'You are now signed in.');
+    redirectPath = getStatusRedirect('/', '', 'Anmelden erfolgreich, Du bist nun eingeloggt.');
   } else {
     redirectPath = getErrorRedirect(
       '/signin/password_signin',
@@ -190,7 +190,7 @@ export async function signUp(formData: FormData) {
   if (error) {
     redirectPath = getErrorRedirect(
       '/signin/signup',
-      'Sign up failed.',
+      'Anmelden failed.',
       error.message
     );
   } else if (data.session) {
@@ -202,7 +202,7 @@ export async function signUp(formData: FormData) {
   ) {
     redirectPath = getErrorRedirect(
       '/signin/signup',
-      'Sign up failed.',
+      'Anmelden failed.',
       'There is already an account associated with this email address. Try resetting your password.'
     );
   } else if (data.user) {

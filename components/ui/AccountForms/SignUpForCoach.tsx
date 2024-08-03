@@ -86,13 +86,13 @@ export default function SignUpForCoach() {
     <>
       <Card
         title="Melde dich für eine Tour an."
-        description="Derzeit sind noch keine Trainer verfügbar"
+        description="Derzeit sind noch keine Touren verfügbar"
         footer={
           <div className="flex flex-col items-start justify-between text-white sm:flex-row sm:items-center">
             <p className="pb-4 sm:pb-0"></p>
             {!subscribed && (
               <p className="text-red-500">
-                Sie können sich erst dann für eine Veranstaltung anmelden, wenn Ihr Abonnement bestätigt wurde.
+                Du Kannst dich erst dann für eine Tour anmelden, wenn deine Mitgliedschaft freigeschaltet wurde
               </p>
             )}
             <Button

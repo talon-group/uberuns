@@ -95,7 +95,7 @@ export default function ContactFormTwo({ subscription }: Props) {
               onClick={handleOpenContactForm}
               loading={isSubmitting}
             >
-              Kontakt Formular
+              Zum Kontaktformular
             </Button>
           </div>
         }
@@ -118,7 +118,7 @@ export default function ContactFormTwo({ subscription }: Props) {
               onClick={handleCloseContactForm}
               className="mt-4"
             >
-              Close
+              Schließen
             </Button>
           </div>
         </div>

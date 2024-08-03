@@ -28,7 +28,7 @@ const SignUpPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent the default form submission behavior
     setIsSubmitting(true); // Disable the button while the request is being handled
-    await handleRequest(e, signUp, router, '/account'); // Add '/account' as the redirection path after sign up
+    await handleRequest(e, signUp, router, '/account'); // Add '/account' as the redirection path after Anmelden
     setIsSubmitting(false);
   };
 
@@ -43,7 +43,7 @@ const SignUpPage: React.FC = () => {
             alt="Logo"
           />
         </div>
-        <Card title="Sign Up">
+        <Card title="Anmelden">
           <div className="my-8">
             <form
               noValidate={true}
@@ -82,7 +82,7 @@ const SignUpPage: React.FC = () => {
                   className="mt-1"
                   loading={isSubmitting}
                 >
-                  Sign up
+                  Anmelden
                 </Button>
               </div>
             </form>

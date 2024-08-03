@@ -94,8 +94,8 @@ export default function PaymentsForm({ user }: PaymentsFormProps) {
 
   return (
     <Card
-      title="Zahlungsinformationen"
-      description="Aktualisieren Sie Ihre IBAN und überprüfen Sie Ihren Abonnementstatus"
+      title="Kontodaten ändern?"
+      description="Gib hier deine neue Bankverbindung an"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <p className='text-red-800 text-l'>Hier kannst du für 19,04€ pro Saison in den Nordkurve12 e.V. eintreten. Wenn du schon einmal Mitglied warst, melde dich bitte bei uns und fülle bitte nichts aus.</p>
@@ -114,7 +114,7 @@ export default function PaymentsForm({ user }: PaymentsFormProps) {
         </div>
         <div className="flex flex-col">
           <label htmlFor="account_owner" className="text-sm font-medium text-gray-700">
-            Account Owner
+            Kontoinhaber
           </label>
           <input
             type="text"
@@ -149,7 +149,7 @@ export default function PaymentsForm({ user }: PaymentsFormProps) {
             {loading ? 'Saving...' : 'Speichern'}
           </Button>
           <p className={`text-lg font-semibold ${subscribed ? 'text-green-600' : 'text-red-600'}`}>
-            Abonnementstatus: {subscribed === null ? 'Nicht abonniert' : subscribed ? 'Subscribed' : 'Nicht abonniert'}
+            Mitglied in der Saison 24/25:: {subscribed === null ? 'Nein' : subscribed ? 'Ja' : 'Nein'}
           </p>
         </div>
       </form>

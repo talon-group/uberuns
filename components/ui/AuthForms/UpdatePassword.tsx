@@ -31,7 +31,7 @@ export default function UpdatePassword({
       >
         <div className="grid gap-2">
           <div className="grid gap-1">
-            <label htmlFor="password">New Password</label>
+            <label htmlFor="password">New Passwort</label>
             <input
               id="password"
               placeholder="Password"
@@ -40,7 +40,7 @@ export default function UpdatePassword({
               autoComplete="current-password"
               className="w-full p-3 rounded-md bg-zinc-200"
             />
-            <label htmlFor="passwordConfirm">Confirm New Password</label>
+            <label htmlFor="passwordConfirm">Confirm New Passwort</label>
             <input
               id="passwordConfirm"
               placeholder="Password"
@@ -56,7 +56,7 @@ export default function UpdatePassword({
             className="mt-1"
             loading={isSubmitting}
           >
-            Update Password
+            Update Passwort
           </Button>
         </div>
       </form>

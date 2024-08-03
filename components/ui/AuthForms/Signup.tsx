@@ -44,7 +44,7 @@ export default function SignUp({ allowEmail, redirectMethod }: SignUpProps) {
               autoCorrect="off"
               className="w-full p-3 rounded-md bg-red-800"
             />
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Passwort</label>
             <input
               id="password"
               placeholder="Password"
@@ -60,14 +60,14 @@ export default function SignUp({ allowEmail, redirectMethod }: SignUpProps) {
             className="mt-1"
             loading={isSubmitting}
           >
-            Sign up
+            Anmelden
           </Button>
         </div>
       </form>
       <p>Already have an account?</p>
       <p>
         <Link href="/signin/password_signin" className="font-light text-sm">
-          Anmelden with email and password
+          Anmelden with E-Mail
         </Link>
       </p>
     </div>

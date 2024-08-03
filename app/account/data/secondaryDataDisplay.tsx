@@ -126,7 +126,7 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
         throw error;
       } 
 
-      setSuccessMessage('User data updated successfully!');
+      setSuccessMessage('Deine Daten wurden aktualisiert!');
       setUpdateSuccessful(true); // Set updateSuccessful to true
     } catch (error: any) {
       setError('Error updating user data!');

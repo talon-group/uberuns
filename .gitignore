@@ -3,3 +3,5 @@ node_modules
 .vercel
 .next
 /.next
+test.csv
+output_file.csv
