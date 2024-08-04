@@ -42,7 +42,7 @@ export default function PasswordSignIn({
       >
         <div className="grid gap-2">
           <div className="grid gap-1">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">E-Mail</label>
             <input
               id="email"
               placeholder="name@example.com"
@@ -71,27 +71,22 @@ export default function PasswordSignIn({
             className="mt-1"
             loading={isSubmitting}
           >
-            Sign in
+            Anmelden
           </Button>
         </div>
       </form>
       <p>
         <Link href="/signin/forgot_password" className="font-light text-sm">
-          Forgot your password?
+          Passwort vergessen?
         </Link>
       </p>
       {/* {allowEmail && (
         <p>
           <Link href="/signin/email_signin" className="font-light text-sm">
-            Sign in via magic link
+            Anmelden via magic link
           </Link>
         </p>
       )} */}
-      <p>
-        <Link href="/signin/signup" className="font-light text-sm">
-          Don't have an account? Sign up
-        </Link>
-      </p>
     </div>
   );
 }

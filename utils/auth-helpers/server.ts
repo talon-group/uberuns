@@ -146,7 +146,7 @@ export async function signInWithPassword(formData: FormData) {
   if (error) {
     redirectPath = getErrorRedirect(
       '/signin/password_signin',
-      'Sign in failed.',
+      'Anmelden failed.',
       error.message
     );
   } else if (data.user) {

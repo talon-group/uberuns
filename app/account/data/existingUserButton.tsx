@@ -22,14 +22,14 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
   useEffect(() => {
     if (user) {
       setUserEmail(user.email);
-    }
+    };
   }, [user]);
 
   const fetchUserData = useCallback(async () => {
     if (!user || !userEmail) {
       console.warn("User is not signed in or email is undefined");
       return;
-    }
+    };
 
     try {
       setLoading(true);
@@ -171,7 +171,7 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
           disabled={loading}
           className='bg-red-800'
         >
-          {loading ? 'Loading ...' : 'Next Step'}
+          {loading ? 'Loading ...' : 'Nächster Schritt'}
         </Button> */}
       </div>
     );
@@ -188,7 +188,7 @@ export default function ExistingUserButton({ user }: { user: User | null }) {
             disabled={loading}
             className='bg-red-800'
           >
-            {loading ? 'Loading ...' : 'Next Step'}
+            {loading ? 'Loading ...' : 'Nächster Schritt'}
           </Button>
         )}
       </div>

@@ -7,6 +7,7 @@ import { redirect } from 'next/navigation';
 import { createClient } from '@/utils/supabase/server';
 import { getUserDetails, getSubscription, getUser, getProducts } from '@/utils/supabase/queries';
 import PaymentsForm from './onboarding/paymentForm';
+import ContactFormTwo from '@/components/ui/AccountForms/Contact';
 
 export default async function Account() {
   const supabase = createClient();
@@ -14,7 +15,7 @@ export default async function Account() {
     getUser(supabase),
     getUserDetails(supabase),
     getSubscription(supabase),
-    getProducts(supabase) // Assuming you have a function to get products
+    getProducts(supabase)
   ]);
 
   if (!user) {
@@ -23,6 +24,20 @@ export default async function Account() {
 
   // Convert `user.email` to `string | null`
   const userEmail: string | null = user.email ?? null;
+
+  // Calculate user's age based on `geb_datum`
+  const calculateAge = (birthdate: string) => {
+    const birthDate = new Date(birthdate);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
+  const userAge = userDetails?.geb_datum ? calculateAge(userDetails.geb_datum) : null;
 
   return (
     <section className="mb-32 bg-white">
@@ -38,16 +53,20 @@ export default async function Account() {
       </div>
       <div className="p-4">
         <EmailForm userEmail={user.email} />
-        <PaymentsForm user={user} />
         {/* {subscription && (
           <CustomerPortalForm subscription={subscription} />
         )} */}
         {/* {!subscription && (
           <YearlyBillingProducts products={products ?? []} subscription={subscription} />
         )} */}
-        <SignUpForCoach subscription={subscription} />
+        {/* {userAge !== null && userAge >= 18 && (
+          <SignUpForCoach subscription={subscription} />
+        )} */}
+        <SignUpForCoach />
+        <ContactFormTwo subscription={subscription} />
       </div>
       <UserStatusChecker user={user} userEmail={userEmail} />
+      <PaymentsForm user={user} />
     </section>
   );
-}
+};

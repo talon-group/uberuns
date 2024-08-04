@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
 import Button from '@/components/ui/Button';
@@ -10,6 +10,43 @@ export default function TermsPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isFromUserdatas, setIsFromUserdatas] = useState(false);
+
+  useEffect(() => {
+    const checkUserdatas = async () => {
+      try {
+        // Fetch the current user
+        const { data: { user }, error: authError } = await supabase.auth.getUser();
+        if (authError) {
+          throw authError;
+        }
+
+        if (!user || !user.id) {
+          throw new Error('User is not signed in or user ID is undefined');
+        }
+
+        // Check if the user's data is coming from the userdatas table
+        const { data, error } = await supabase
+          .from('users')
+          .select('userdatas')
+          .eq('id', user.id)
+          .single();
+
+        if (error) {
+          throw error;
+        }
+
+        if (data?.userdatas) {
+          setIsFromUserdatas(true);
+        }
+      } catch (error: any) {
+        console.error('Error checking userdatas status:', error.message);
+        setErrorMessage('Error checking userdatas status.');
+      }
+    };
+
+    checkUserdatas();
+  }, [supabase]);
 
   const handleAcceptTerms = async () => {
     setLoading(true);
@@ -43,6 +80,12 @@ export default function TermsPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (isFromUserdatas) {
+      router.push('/account');
+    }
+  }, [isFromUserdatas, router]);
 
   return (
     <div className="p-5 bg-gray-100 min-h-screen flex flex-col items-center">

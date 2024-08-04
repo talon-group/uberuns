@@ -33,7 +33,7 @@ export default function SignUp({ allowEmail, redirectMethod }: SignUpProps) {
       >
         <div className="grid gap-2">
           <div className="grid gap-1">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">E-Mail</label>
             <input
               id="email"
               placeholder="name@example.com"
@@ -67,7 +67,7 @@ export default function SignUp({ allowEmail, redirectMethod }: SignUpProps) {
       <p>Already have an account?</p>
       <p>
         <Link href="/signin/password_signin" className="font-light text-sm">
-          Sign in with email and password
+          Anmelden with email and password
         </Link>
       </p>
     </div>

@@ -13,7 +13,7 @@ const CallToActionGrid = () => {
           </div>
           <Link legacyBehavior href="/signin/up">
             <a className="self-start mt-4 px-4 py-2 bg-red-800 text-white font-semibold rounded-lg shadow-md hover:bg-red-700">
-              Melden Sie sich an
+              Einmalig anmelden
             </a>
           </Link>
         </div>
@@ -24,7 +24,7 @@ const CallToActionGrid = () => {
           </div>
           <Link legacyBehavior href="/signin/new">
             <a className="self-start mt-4 px-4 py-2 bg-red-800 text-white font-semibold rounded-lg shadow-md hover:bg-green-700">
-              Melden Sie sich an
+              Mitglied Werden
             </a>
           </Link>
         </div>
@@ -35,7 +35,7 @@ const CallToActionGrid = () => {
           </div>
           <Link legacyBehavior href="/signin">
             <a className="self-start mt-4 px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700">
-              Anmeldung
+              Login
             </a>
           </Link>
         </div>

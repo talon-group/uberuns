@@ -55,7 +55,7 @@ const SignUpPage: React.FC = () => {
                   Bitte gib deine bei uns hinterlegte E-Mail Adresse an und erstelle dir ein individuelles Passwort, welches du künftig für den Mitgliederbereich benötigst.
                 </p>
                 <div className="grid gap-1">
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email">E-Mail</label>
                   <input
                     id="email"
                     placeholder="name@example.com"

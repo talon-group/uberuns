@@ -35,7 +35,7 @@ export const getViewTypes = () => {
 };
 
 export const getDefaultSignInView = (preferredSignInView: string | null) => {
-  // Define the default sign in view
+  // Define the default Anmelden view
   let defaultView = allowPassword ? 'password_signin' : 'email_signin';
   if (preferredSignInView && getViewTypes().includes(preferredSignInView)) {
     defaultView = preferredSignInView;

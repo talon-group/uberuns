@@ -63,12 +63,12 @@ export default async function SignIn({
         <Card
           title={
             viewProp === 'forgot_password'
-              ? 'Reset Password'
+              ? 'Passwort zurücksetzen'
               : viewProp === 'update_password'
                 ? 'Update Password'
                 : viewProp === 'signup'
                   ? 'Sign Up'
-                  : 'Sign In'
+                  : 'Anmelden'
           }
         >
           {viewProp === 'password_signin' && (

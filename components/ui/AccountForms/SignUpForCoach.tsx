@@ -25,9 +25,9 @@ type SubscriptionWithPriceAndProduct = Subscription & {
 
 interface Props {
   subscription: SubscriptionWithPriceAndProduct | null;
-}
+};
 
-export default function SignUpForCoach({ subscription }: Props) {
+export default function SignUpForCoach() {
   const router = useRouter();
   const currentPath = usePathname();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -35,7 +35,7 @@ export default function SignUpForCoach({ subscription }: Props) {
   const [user, setUser] = useState<User | null>(null);
   const [subscribed, setSubscribed] = useState<boolean | null>(null);
   const supabase = createClient();
-
+ 
   useEffect(() => {
     const fetchUser = async () => {
       const { data: { user } } = await supabase.auth.getUser();
@@ -108,7 +108,7 @@ export default function SignUpForCoach({ subscription }: Props) {
       >
         <></>
       </Card>
-      <Card
+      {/* <Card
         title="Kontaktiere uns"
         description="Du hast eine Frage? Füll das Formular aus und wir melden uns bei dir."
         footer={
@@ -146,7 +146,7 @@ export default function SignUpForCoach({ subscription }: Props) {
             </Button>
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 }

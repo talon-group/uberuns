@@ -132,6 +132,19 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
     }
   };
 
+  const calculateAge = (dob: string) => {
+    const birthDate = new Date(dob);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
+  const isOver18 = formData.geb_datum ? calculateAge(formData.geb_datum) >= 18 : false;
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -156,7 +169,7 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
             />
           </div> */}
           <div className="flex flex-col">
-            <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>
+            <label htmlFor="email" className="text-sm font-medium text-gray-700">E-Mail</label>
             <input
               id="email"
               type="text"
@@ -269,13 +282,18 @@ export default function UserDataDisplay({ user }: { user: User | null }) {
             disabled={isSubmitting}
             className="mt-4 px-4 py-2 bg-red-800 text-white rounded-md shadow-sm hover:bg-red-700 disabled:opacity-50"
           >
-            {isSubmitting ? 'Updating...' : 'Daten aktualisieren'}
+            {isSubmitting ? 'Updating...' : 'Daten absenden'}
           </button>
         </form>
+        <div className="mt-4">
+          {/* <p className="text-sm font-medium text-gray-700">
+            {isOver18 ? 'Over 18' : 'Under 18'}
+          </p> */}
+        </div>
       </div>
     </Card>
   );
-}
+};
 
 export async function UserDataDisplayAsPage() {
   const supabase = createClient();
@@ -287,4 +305,4 @@ export async function UserDataDisplayAsPage() {
   return (
     <UserDataDisplay user={user} />
   );
-}
+};

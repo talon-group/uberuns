@@ -133,7 +133,7 @@ export default function SecondUserDataDisplayAccount({ user }: { user: User | nu
       setError(null);
       setSuccessMessage(null);
 
-      const requiredFields = ['plz', 'land', 'ort', 'vorname', 'nachname', 'adresse', 'geb_datum'];
+      const requiredFields = ['plz', 'land', 'memberid', 'ort', 'vorname', 'nachname', 'adresse', 'geb_datum'];
       const missingFields = requiredFields.filter(field => !userDatas?.[field]);
 
       if (missingFields.length > 0) {
@@ -267,16 +267,16 @@ export default function SecondUserDataDisplayAccount({ user }: { user: User | nu
           </Button>
           <Button
             variant="slim"
-            onClick={() => router.push('/account/onboarding/terms')}
+            onClick={() => router.push('/account/')}
             disabled={loading}
             className="ml-4"
           >
-            Next Step
+            Beenden
           </Button>
         </>
       }
     >
-      <p className='text-red-800'>Hier siehst du deine bei uns hinterlegten Daten.<br />
+      <p className='text-red-800 py-3'>Hier siehst du deine bei uns hinterlegten Daten.<br />
 Bitte überprüfe alles auf Richtigkeit und ändere ggfs. Dinge.<br />
 Neu fragen wir nun auch den Debitor bei Bayer 04 ab, um dir künftig Zugang zu Ticketkäufen in Verbindung mit Bus- oder Zugtouren geben zu können.<br />
 Den Debitor kannst du uns aber auch erst bei Bedarf mitteilen, deshalb ist dies kein Pflichtfeld.</p>
@@ -285,7 +285,7 @@ Den Debitor kannst du uns aber auch erst bei Bedarf mitteilen, deshalb ist dies 
         {successMessage && <div className="text-green-500">{successMessage}</div>}
         <div className="space-y-4">
           <div className="flex flex-col">
-            <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>
+            <label htmlFor="email" className="text-sm font-medium text-gray-700">E-Mail</label>
             <input
               id="email"
               type="text"
@@ -294,14 +294,14 @@ Den Debitor kannst du uns aber auch erst bei Bedarf mitteilen, deshalb ist dies 
               className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
             />
           </div>
-          <div className="flex flex-col">
-            <label htmlFor="fullname" className="text-sm font-medium text-gray-700">Full Name</label>
+          <div className='flex flex-col'>
+            <label htmlFor="memberid" className='text-sm font-medium text-gray-700'>Member ID</label>
             <input
-              id="fullname"
+              id="memberid"
               type="text"
-              value={fullname || ''}
-              onChange={(e) => setFullname(e.target.value)}
-              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
+              value={memberId || ''}
+              disabled
+              className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
             />
           </div>
           <div className="flex flex-col">
@@ -389,14 +389,6 @@ Den Debitor kannst du uns aber auch erst bei Bedarf mitteilen, deshalb ist dies 
             />
           </div>
         </div>
-        <Button variant="slim" onClick={generateMemberId} disabled={loading || !userDatas || !!memberId}>
-          {loading ? 'Generating...' : 'Generate Member ID'}
-        </Button>
-        {memberId && (
-          <div className="text-sm text-gray-700 mt-2">
-            <span>Member ID:</span> <span className="font-semibold">{memberId}</span>
-          </div>
-        )}
       </div>
     </Card>
   );

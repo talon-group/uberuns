@@ -52,7 +52,7 @@ const SignUpPage: React.FC = () => {
             >
               <div className="grid gap-2">
                 <div className="grid gap-1">
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email">E-Mail</label>
                   <input
                     id="email"
                     placeholder="name@example.com"

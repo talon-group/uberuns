@@ -124,7 +124,7 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
 
       if (error) {
         throw error;
-      }
+      } 
 
       setSuccessMessage('User data updated successfully!');
       setUpdateSuccessful(true); // Set updateSuccessful to true
@@ -143,6 +143,12 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
   return (
     <Card title="Deine Daten">
       <p className='text-red-800'>Bitte füll die folgenden Felder aus, um in die Nordkurve12 einzutreten.</p>
+      {/* <div className='my-4'>
+      <p className='text-red-800'>Hier siehst du deine bei uns hinterlegten Daten.<br />
+Bitte überprüfe alles auf Richtigkeit und ändere ggfs. Dinge.<br />
+Neu fragen wir nun auch den Debitor bei Bayer 04 ab, um dir künftig Zugang zu Ticketkäufen in Verbindung mit Bus- oder Zugtouren geben zu können.<br />
+Den Debitor kannst du uns aber auch erst bei Bedarf mitteilen, deshalb ist dies kein Pflichtfeld.</p>
+      </div> */}
       <div className="form-widget space-y-6">
         {successMessage && <p className="text-green-600">{successMessage}</p>}
         {error && <p className="text-red-600">{error}</p>}
@@ -151,7 +157,7 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
           </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex flex-col">
-            <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>
+            <label htmlFor="email" className="text-sm font-medium text-gray-700">E-Mail</label>
             <input
               id="email"
               type="text"
@@ -264,7 +270,7 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
             disabled={isSubmitting}
             className="mt-4 px-4 py-2 bg-red-800 text-white rounded-md shadow-sm hover:bg-red-300 disabled:opacity-50"
           >
-            {isSubmitting ? 'Updating...' : 'Daten aktualisieren'}
+            {isSubmitting ? 'Updating...' : 'Daten absenden'}
           </button>
         </form>
         {updateSuccessful && (
@@ -273,7 +279,7 @@ export default function SecondUserDataDisplay({ user }: { user: User | null }) {
               onClick={() => router.push('/account/onboarding/terms')}
               className="px-4 py-2 bg-green-600 text-white rounded-md shadow-sm hover:bg-green-700"
             >
-              Next Step
+              Nächster Schritt
             </button>
           </div>
         )}

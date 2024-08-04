@@ -216,8 +216,8 @@ export default function AccountForm({ user }: { user: User | null }) {
       console.error('Error updating profile:', error.message);
     } finally {
       setLoading(false);
-    }
-  }
+    };
+  };
 
   async function generateMemberId() {
     try {
@@ -243,7 +243,7 @@ export default function AccountForm({ user }: { user: User | null }) {
 
       if (updateMemberIdError) {
         throw updateMemberIdError;
-      }
+      };
 
       setMemberId(newMemberId.toString());
       setSuccessMessage('New Member ID generated successfully!');
@@ -252,8 +252,8 @@ export default function AccountForm({ user }: { user: User | null }) {
       console.error('Error generating member ID:', error.message);
     } finally {
       setLoading(false);
-    }
-  }
+    };
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -282,7 +282,7 @@ export default function AccountForm({ user }: { user: User | null }) {
         {successMessage && <div className="text-green-500">{successMessage}</div>}
         <div className="space-y-4">
           <div className="flex flex-col">
-            <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>
+            <label htmlFor="email" className="text-sm font-medium text-gray-700">E-Mail</label>
             <input
               id="email"
               type="text"
@@ -409,3 +409,4 @@ export async function AccountFormAsPage() {
     <AccountForm user={user} />
   );
 };
+

@@ -37,7 +37,7 @@ export default function EmailSignIn({
       >
         <div className="grid gap-2">
           <div className="grid gap-1">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">E-Mail</label>
             <input
               id="email"
               placeholder="name@example.com"
@@ -56,7 +56,7 @@ export default function EmailSignIn({
             loading={isSubmitting}
             disabled={disableButton}
           >
-            Sign in
+            Anmelden
           </Button>
         </div>
       </form>
@@ -64,12 +64,7 @@ export default function EmailSignIn({
         <>
           <p>
             <Link href="/signin/password_signin" className="font-light text-sm">
-              Sign in with email and password
-            </Link>
-          </p>
-          <p>
-            <Link href="/signin/signup" className="font-light text-sm">
-              Don't have an account? Sign up
+              Anmelden with email and password
             </Link>
           </p>
         </>
