@@ -4,6 +4,7 @@ import ExistingUserButton from '../data/existingUserButton';
 import UserDataDisplay from '../data/dataDisplay'; 
 import { createClient } from '@/utils/supabase/client';
 import { useEffect, useState } from 'react';
+import { redirect } from 'next/navigation';
 import { type User } from '@supabase/supabase-js';
 
 export default function AccountPage() {
@@ -20,7 +21,9 @@ export default function AccountPage() {
   }, []);
 
   if (!user) {
-    return <p>Loading...</p>;
+    if (!user) {
+      return redirect('/signin');
+    };
   };
 
   return (

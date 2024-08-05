@@ -10,7 +10,7 @@ interface Post {
   slug: string;
   html: string;
   feature_image: string; // Include feature image
-}
+};
 
 // Helper function to get the first three paragraphs of a post, including images
 const getExcerpt = (html: string) => {
@@ -24,9 +24,9 @@ const getExcerpt = (html: string) => {
     const element = paragraphs[i];
     if (element.tagName === 'P') {
       paragraphCount++;
-    }
+    };
     excerpt += element.outerHTML;
-  }
+  };
 
   return excerpt;
 };

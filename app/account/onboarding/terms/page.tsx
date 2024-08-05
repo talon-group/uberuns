@@ -4,13 +4,31 @@ import { useEffect, useState } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
 import Button from '@/components/ui/Button';
+import { redirect } from 'next/navigation';
+import { type User } from '@supabase/supabase-js';
 
 export default function TermsPage() {
   const supabase = createClient();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isFromUserdatas, setIsFromUserdatas] = useState(false);
+  
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data } = await supabase.auth.getUser();
+      setUser(data.user);
+    };
+
+    fetchUser();
+  }, []);
+
+  if (!user) {
+    if (!user) {
+      return redirect('/signin');
+    };
+  };
 
   useEffect(() => {
     const checkUserdatas = async () => {

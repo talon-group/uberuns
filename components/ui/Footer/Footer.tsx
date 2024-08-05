@@ -64,7 +64,7 @@ export default function Footer() {
       <div className="flex flex-col items-center justify-between py-12 space-y-4 md:flex-row bg-zinc-900">
         <div>
           <span className="text-white">
-            &copy; {new Date().getFullYear()} Entworfen von Nordkurve-Mitglied Liam Arbuckle (Talonova Aerospace) in Australien. 🇦🇺 🤝 🇩🇪
+            &copy; {new Date().getFullYear()} | Nordkurve12 e.V.
           </span>
         </div>
         <div>

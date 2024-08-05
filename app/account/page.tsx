@@ -4,6 +4,7 @@ import SignUpForCoach from '@/components/ui/AccountForms/SignUpForCoach';
 import YearlyBillingProducts from '@/components/ui/Pricing/YearlyPricingSnippet';
 import UserStatusChecker from './memberStatus';
 import { redirect } from 'next/navigation';
+ 
 import { createClient } from '@/utils/supabase/server';
 import { getUserDetails, getSubscription, getUser, getProducts } from '@/utils/supabase/queries';
 import PaymentsForm from './onboarding/paymentForm';
@@ -20,28 +21,13 @@ export default async function Account() {
 
   if (!user) {
     return redirect('/signin');
-  }
+  };
 
   // Convert `user.email` to `string | null`
   const userEmail: string | null = user.email ?? null;
 
-  // Calculate user's age based on `geb_datum`
-  const calculateAge = (birthdate: string) => {
-    const birthDate = new Date(birthdate);
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-    return age;
-  };
-
-  const userAge = userDetails?.geb_datum ? calculateAge(userDetails.geb_datum) : null;
-
   return (
     <div
-        className="absolute inset-0 bg-cover bg-center opacity-20"
         style={{ backgroundImage: "url('https://github.com/talon-group/uberuns/blob/3d6f3d6a3f731bb1308cf5fa1977480e0b3a1c71/public/bg.jpeg?raw=true')" }}
       >
     <section className="mb-32 bg-white">
